@@ -1,24 +1,78 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/publytics/SiteHeader";
+import { Hero } from "@/components/publytics/Hero";
+import {
+  ProblemSection,
+  PlatformSection,
+  UseCasesSection,
+  VoticsSection,
+  ServicesSection,
+  MarketSection,
+  TeamSection,
+  CtaSection,
+} from "@/components/publytics/sections";
+import { SiteFooter } from "@/components/publytics/SiteFooter";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITLE = "Publytics — Political Research, Strategy & Action";
+const DESCRIPTION =
+  "Publytics turns data into mandates. VotHub unites seven AI-powered products for voter intelligence, field execution, content, war room and fundraising.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Publytics",
+          description: DESCRIPTION,
+          slogan: "Political Research, Strategy & Action",
+          areaServed: ["India", "United States", "Europe"],
+          makesOffer: [
+            "Votics",
+            "VotEngage",
+            "VotBot",
+            "VotReady",
+            "VotCMS",
+            "VotNxt",
+            "VotFund",
+          ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name } })),
+        }),
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <SiteHeader />
+      <main>
+        <Hero />
+        <ProblemSection />
+        <PlatformSection />
+        <UseCasesSection />
+        <VoticsSection />
+        <ServicesSection />
+        <MarketSection />
+        <TeamSection />
+        <CtaSection />
+      </main>
+      <SiteFooter />
     </div>
   );
 }
