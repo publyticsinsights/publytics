@@ -527,6 +527,8 @@ export function TeamSection() {
 
 /* ------------------------------ CTA ------------------------------ */
 
+import { BriefingForm } from "./BriefingForm";
+
 export function CtaSection() {
   return (
     <section id="contact" className="relative overflow-hidden border-t border-border py-24">
@@ -534,30 +536,23 @@ export function CtaSection() {
         aria-hidden="true"
         className="absolute inset-0 bg-[image:var(--gradient-hero)] opacity-90"
       />
-      <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-10">
-        <p className="eyebrow">Engage Publytics</p>
-        <h2 className="mt-4 text-3xl font-extrabold text-balance sm:text-4xl">
-          Bring evidence to your next mandate.
-        </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
-          Request a confidential executive briefing. We will walk your leadership through the VotHub
-          platform, a constituency-level intelligence sample and a deployment roadmap for your cycle.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="mailto:contact@publytics.com"
-            className="rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-signal)] transition-opacity hover:opacity-90"
-          >
-            Request a briefing
-          </a>
-          <a
-            href="#platform"
-            className="rounded-md border border-border bg-surface/70 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur transition-colors hover:bg-secondary"
-          >
-            Review the platform
-          </a>
+      <div className="relative mx-auto max-w-3xl px-6 lg:px-10">
+        <div className="text-center">
+          <p className="eyebrow">Engage Publytics</p>
+          <h2 className="mt-4 text-3xl font-extrabold text-balance sm:text-4xl">
+            Bring evidence to your next mandate.
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
+            Request a confidential executive briefing. We will walk your leadership through the VotHub
+            platform, a constituency-level intelligence sample and a deployment roadmap for your cycle.
+          </p>
         </div>
-        <p className="mt-8 flex items-center justify-center gap-2 text-xs text-ink-muted">
+
+        <div className="mt-10">
+          <BriefingForm />
+        </div>
+
+        <p className="mt-8 flex items-center justify-center gap-2 text-center text-xs text-ink-muted">
           <AlertTriangle className="h-3.5 w-3.5" aria-hidden="true" />
           All engagements operate under strict confidentiality and electoral compliance guardrails.
         </p>
