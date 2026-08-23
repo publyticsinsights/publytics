@@ -2,20 +2,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/publytics/SiteHeader";
 import { Hero } from "@/components/publytics/Hero";
 import {
-  ProblemSection,
-  PlatformSection,
-  UseCasesSection,
-  VoticsSection,
+  AudienceSection,
+  ProductsSection,
+  AiSection,
   ServicesSection,
-  MarketSection,
-  TeamSection,
+  RigourSection,
   CtaSection,
 } from "@/components/publytics/sections";
 import { SiteFooter } from "@/components/publytics/SiteFooter";
 
-const TITLE = "Publytics — Political Research, Strategy & Action";
+const TITLE = "Publytics — Public-Interest Data & AI";
 const DESCRIPTION =
-  "Publytics turns data into mandates. VotHub unites seven AI-powered products for voter intelligence, field execution, content, war room and fundraising.";
+  "Publytics builds rigorous data and AI infrastructure for government, enterprise, and civic or research institutions.";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -40,17 +38,9 @@ export const Route = createFileRoute("/")({
           "@type": "Organization",
           name: "Publytics",
           description: DESCRIPTION,
-          slogan: "Political Research, Strategy & Action",
-          areaServed: ["India", "United States", "Europe"],
-          makesOffer: [
-            "Votics",
-            "VotEngage",
-            "VotBot",
-            "VotReady",
-            "VotCMS",
-            "VotNxt",
-            "VotFund",
-          ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "SoftwareApplication", name } })),
+          slogan: "Public-interest data infrastructure",
+          areaServed: "India",
+          knowsAbout: ["GovTech", "Civic data", "Responsible AI", "Regulatory technology", "Policy research"],
         }),
       },
     ],
@@ -63,13 +53,11 @@ function Index() {
       <SiteHeader />
       <main>
         <Hero />
-        <ProblemSection />
-        <PlatformSection />
-        <UseCasesSection />
-        <VoticsSection />
+        <AudienceSection />
+        <ProductsSection />
+        <AiSection />
         <ServicesSection />
-        <MarketSection />
-        <TeamSection />
+        <RigourSection />
         <CtaSection />
       </main>
       <SiteFooter />

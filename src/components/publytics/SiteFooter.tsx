@@ -1,53 +1,11 @@
 import { Logo } from "./Logo";
 
 const COLUMNS = [
-  {
-    title: "Platform",
-    links: ["Votics", "VotEngage", "VotBot", "VotReady", "VotCMS", "VotNxt", "VotFund"],
-  },
-  {
-    title: "Services",
-    links: ["Research", "Analytics", "Strategy", "Enablement"],
-  },
-  {
-    title: "Ecosystem",
-    links: ["Marketplace", "Academy", "Network"],
-  },
+  { title: "Solutions", links: [["Government & public sector", "#government"], ["Enterprise & GCCs", "#enterprise"], ["Civic & research", "#research"]] },
+  { title: "Explore", links: [["Product families", "#products"], ["Services", "#services"], ["AI principles", "#ai"], ["Insights", "#insights"]] },
+  { title: "Institutional", links: [["Trust & governance", "#trust"], ["Request a briefing", "#contact"], ["Methodology", "#insights"]] },
 ];
 
 export function SiteFooter() {
-  return (
-    <footer className="border-t border-border bg-navy-deep">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
-          <div>
-            <Logo />
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-ink-muted">
-              Political Research, Strategy &amp; Action. Data-driven insights that transform political
-              landscapes and empower change-makers.
-            </p>
-          </div>
-          {COLUMNS.map((col) => (
-            <nav key={col.title} aria-label={col.title}>
-              <h2 className="eyebrow">{col.title}</h2>
-              <ul className="mt-5 space-y-3 text-sm text-ink-muted">
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <a href="#platform" className="transition-colors hover:text-foreground">
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
-        </div>
-
-        <div className="mt-14 flex flex-col gap-3 border-t border-border pt-8 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Publytics. All rights reserved.</p>
-          <p>India · United States · Europe</p>
-        </div>
-      </div>
-    </footer>
-  );
+  return <footer className="border-t border-inverse-border bg-ink text-inverse"><div className="content-shell py-14"><div className="grid gap-12 lg:grid-cols-[1.5fr_repeat(3,1fr)]"><div><Logo className="text-inverse"/><p className="mt-5 max-w-sm text-sm leading-relaxed text-inverse-muted">Data and AI infrastructure for government, enterprise, and institutions working in the public interest.</p></div>{COLUMNS.map((c) => <nav key={c.title} aria-label={c.title}><h2 className="font-mono text-[0.68rem] uppercase text-live">{c.title}</h2><ul className="mt-5 space-y-3">{c.links.map(([label, href]) => <li key={label}><a href={href} className="text-sm text-inverse-muted transition-colors hover:text-inverse">{label}</a></li>)}</ul></nav>)}</div><div className="mt-14 flex flex-col gap-4 border-t border-inverse-border pt-7 text-xs text-inverse-muted sm:flex-row sm:items-center sm:justify-between"><p>© {new Date().getFullYear()} Publytics. All rights reserved.</p><div className="flex flex-wrap gap-5"><span>India</span><span>Privacy</span><span>Data governance</span><span>Accessibility</span></div></div></div></footer>;
 }
