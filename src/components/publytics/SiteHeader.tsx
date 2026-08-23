@@ -28,7 +28,7 @@ export function SiteHeader() {
           {NAV.map((item) => <a key={item.href} href={item.href} className="text-sm font-medium text-ink-muted transition-colors hover:text-foreground">{item.label}</a>)}
         </nav>
         <div className="flex items-center gap-3">
-          <a href="#contact" className="action-primary px-4 py-2.5">Request a briefing</a>
+          <a href="#contact" className="action-primary px-4 py-2.5"><span className="sm:hidden">Briefing</span><span className="hidden sm:inline">Request a briefing</span></a>
           <details className="relative lg:hidden">
             <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center border border-border bg-surface" aria-label="Open navigation"><Menu className="h-5 w-5" /></summary>
             <nav aria-label="Mobile navigation" className="absolute right-0 mt-3 w-64 border border-border bg-background p-3 shadow-lg">

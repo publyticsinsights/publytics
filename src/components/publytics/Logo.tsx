@@ -23,7 +23,7 @@ export function Logo({ className = "", showWordmark = true }: LogoProps) {
         <rect x="39" y="26" width="6" height="16" rx="1.5" fill="currentColor" />
       </svg>
       {showWordmark && (
-        <span className="font-display text-lg font-extrabold tracking-[0.14em] text-current">
+        <span className="font-display text-lg font-extrabold text-current">
           PUBLYTICS
         </span>
       )}
