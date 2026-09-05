@@ -2,45 +2,415 @@
 @source "../src";
 @import "tw-animate-css";
 
+/* ══════════════════════════════════════════════════════════════════════
+   PUBLYTICS DESIGN SYSTEM  ·  v3
+   Built to the measured Palantir reference system.
+
+   Rules that define this system and must not be broken:
+   1. Weight 400 is the default at every size. 500 is emphasis.
+      Nothing is 600/700 except the wordmark. Bold reads cheap.
+   2. Negative tracking scales with size (−0.045em display → 0 at body).
+      Display line-height is BELOW 1.0.
+   3. Radius is 0. Only large blocks and inset panels take 4px.
+   4. Colour is neutral by default. Live-teal means real current data,
+      seal-red means a refusal or a correction. Nothing else is coloured.
+   5. Hairlines, not borders. 1px #DBDBDB, used generously.
+   ══════════════════════════════════════════════════════════════════════ */
+
 @theme inline {
-  --radius-sm: calc(var(--radius) - 2px); --radius-md: var(--radius); --radius-lg: calc(var(--radius) + 2px); --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background); --color-foreground: var(--foreground); --color-surface: var(--surface); --color-hero: var(--hero); --color-contrast: var(--contrast);
-  --color-primary: var(--primary); --color-primary-soft: var(--primary-soft); --color-ink: var(--ink); --color-ink-soft: var(--ink-soft); --color-ink-muted: var(--ink-muted); --color-ink-faint: var(--ink-faint);
-  --color-live: var(--live); --color-live-muted: var(--live-muted); --color-inverse: var(--inverse); --color-inverse-muted: var(--inverse-muted); --color-border: var(--border); --color-strong: var(--strong); --color-inverse-border: var(--inverse-border);
-  --color-card: var(--surface); --color-card-foreground: var(--foreground); --color-popover: var(--surface); --color-popover-foreground: var(--foreground); --color-primary-foreground: var(--inverse); --color-secondary: var(--contrast); --color-secondary-foreground: var(--foreground); --color-muted: var(--contrast); --color-muted-foreground: var(--ink-muted); --color-accent: var(--primary-soft); --color-accent-foreground: var(--primary); --color-destructive: oklch(0.55 0.2 25); --color-input: var(--border); --color-ring: var(--primary);
-  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif; --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif; --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --radius-sm: 0px; --radius-md: 2px; --radius-lg: 4px; --radius-xl: 4px; --radius: 0px;
+
+  /* surfaces */
+  --color-background: var(--paper);
+  --color-surface: var(--surface);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-ink: var(--ink);
+  --color-ink-raised: var(--ink-raised);
+  --color-ink-deep: var(--ink-deep);
+  --color-tint: var(--tint);
+
+  /* text */
+  --color-foreground: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-steel: var(--steel);
+  --color-silver: var(--silver);
+  --color-inverse: var(--inverse);
+  --color-inverse-dim: var(--inverse-dim);
+  --color-inverse-faint: var(--inverse-faint);
+
+  /* lines */
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-line-inverse: var(--line-inverse);
+  --color-border: var(--line);
+
+  /* brand + reserved */
+  --color-brand: var(--brand);
+  --color-live: var(--live);
+  --color-live-mark: var(--live-mark);
+  --color-live-tint: var(--live-tint);
+  --color-live-bright: var(--live-bright);
+  --color-seal: var(--seal);
+  --color-seal-mark: var(--seal-mark);
+  --color-seal-tint: var(--seal-tint);
+
+  /* shadcn compatibility aliases */
+  --color-card: var(--surface); --color-card-foreground: var(--ink);
+  --color-popover: var(--surface); --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink); --color-primary-foreground: var(--surface);
+  --color-secondary: var(--mist); --color-secondary-foreground: var(--ink);
+  --color-muted: var(--mist); --color-muted-foreground: var(--steel);
+  --color-accent: var(--mist); --color-accent-foreground: var(--ink);
+  --color-destructive: var(--seal); --color-input: var(--line); --color-ring: var(--ink);
+
+  --font-display: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
 :root {
-  --radius: 0.25rem;
-  --background: oklch(0.985 0.004 90); --foreground: oklch(0.20 0.025 255); --surface: oklch(1 0 0); --hero: oklch(0.965 0.01 240); --contrast: oklch(0.95 0.008 250);
-  --primary: oklch(0.39 0.11 248); --primary-soft: oklch(0.92 0.035 240); --ink: oklch(0.20 0.035 255); --ink-soft: oklch(0.235 0.035 255); --ink-muted: oklch(0.48 0.025 255); --ink-faint: oklch(0.63 0.018 255);
-  --live: oklch(0.72 0.15 166); --live-muted: oklch(0.72 0.15 166 / 65%); --inverse: oklch(0.98 0.005 240); --inverse-muted: oklch(0.77 0.02 240); --border: oklch(0.86 0.012 250); --strong: oklch(0.75 0.018 250); --inverse-border: oklch(1 0 0 / 14%);
+  /* ── Neutrals. The near-black carries a faint blue-violet cast so the
+     whole system reads as chosen rather than defaulted to #000. ── */
+  --ink:        #1B1E26;
+  --ink-raised: #23262E;
+  --ink-deep:   #14161C;
+  --surface:    #FFFFFF;
+  --paper:      #FAFAFA;
+  --mist:       #EFEFEF;
+  --tint:       #EEF0F7;
+
+  --line:         #DBDBDB;
+  --line-strong:  #C6C8CE;
+  --line-inverse: rgba(255,255,255,0.16);
+
+  --graphite: #4A4D55;
+  --steel:    #74777E;
+  --silver:   #9A9DA4;
+
+  --inverse:       #EFEFEF;
+  --inverse-dim:   #A8ABB2;
+  --inverse-faint: #74777E;
+
+  /* ── Brand. Used for primary action only, never as decoration. ── */
+  --brand: #1B2A4E;
+
+  /* ── Reserved: live data. Verdigris — oxidised copper on public
+     buildings. Appears only where data is real and current. ── */
+  --live:        #0F6B60;
+  --live-mark:   #17857A;
+  --live-bright: #4FC7B4;
+  --live-tint:   #E4F0EE;
+
+  /* ── Reserved: refusals and corrections. Nothing else, ever. ── */
+  --seal:      #8E2A1F;
+  --seal-mark: #A8382A;
+  --seal-tint: #F7E8E4;
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
-  body { background: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
-  h1,h2,h3,h4 { font-family: var(--font-display); letter-spacing: 0; }
-  a,button,summary,input,select,textarea { outline-offset: 3px; }
-  a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline: 2px solid var(--color-primary); }
+  *, *::before, *::after { border-color: var(--line); }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+    background: var(--paper);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  /* Headings inherit the display face but carry NO default weight bump.
+     Size and tracking do the work, never boldness. */
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  strong, b { font-weight: 500; }
+
+  [lang="ta"] {
+    font-family: "Noto Sans Tamil", var(--font-sans);
+    letter-spacing: 0 !important;
+    line-height: 1.8;
+    word-break: keep-all;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  :where(a, button, summary, input, select, textarea):focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
 }
 
-@utility content-shell { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 1.5rem; @media (min-width: 64rem) { padding-inline: 2.5rem; } }
-@utility section-pad { padding-block: 5.5rem; @media (min-width: 64rem) { padding-block: 7rem; } }
-@utility eyebrow { font-family: var(--font-mono); font-size: .7rem; line-height: 1rem; letter-spacing: 0; text-transform: uppercase; color: var(--color-primary); font-weight: 500; }
-@utility action-primary { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; background: var(--color-primary); color: var(--color-inverse); padding: .75rem 1.25rem; font-size: .875rem; line-height: 1.25rem; font-weight: 600; transition: opacity .2s; &:hover { opacity: .88; } }
-@utility action-secondary { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; border: 1px solid var(--color-strong); background: var(--color-surface); color: var(--color-foreground); padding: .75rem 1.25rem; font-size: .875rem; line-height: 1.25rem; font-weight: 600; &:hover { background: var(--color-contrast); } }
-@utility action-inverse { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; background: var(--color-live); color: var(--color-ink); padding: .75rem 1.25rem; font-size: .875rem; font-weight: 700; }
-@utility action-outline-inverse { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; border: 1px solid var(--color-inverse-border); color: var(--color-inverse); padding: .75rem 1.25rem; font-size: .875rem; font-weight: 600; }
-@utility data-grid { background-image: linear-gradient(to right, color-mix(in oklab,var(--border) 65%,transparent) 1px,transparent 1px),linear-gradient(to bottom,color-mix(in oklab,var(--border) 65%,transparent) 1px,transparent 1px); background-size: 64px 64px; mask-image: linear-gradient(to bottom,black,transparent 92%); }
-@utility signal-panel { border: 1px solid var(--color-strong); background: color-mix(in oklab,var(--surface) 92%,transparent); padding: 1.5rem; box-shadow: 0 24px 70px -50px var(--color-ink); backdrop-filter: blur(8px); }
-@utility system-map { position: relative; display: grid; gap: 1px; background: var(--color-border); border: 1px solid var(--color-border); @media (min-width: 40rem) { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-@utility system-core { grid-column: 1/-1; display: flex; align-items: center; justify-content: center; gap: 1rem; min-height: 7rem; background: var(--color-primary); color: var(--color-inverse); font-weight: 700; text-align: left; small { font-family: var(--font-mono); font-size: .62rem; font-weight: 400; color: color-mix(in oklab,var(--inverse) 70%,transparent); } }
-@utility system-node { display: grid; grid-template-columns: auto 1fr; column-gap: 1rem; row-gap: .75rem; min-height: 12rem; background: var(--color-surface); padding: 1.4rem; h3,p { grid-column: 1/-1; } }
-@utility evidence-sheet { border: 1px solid var(--color-border); background: var(--color-surface); padding: 1.5rem; box-shadow: 0 24px 60px -52px var(--color-ink); @media (min-width: 40rem) { padding: 2rem; } }
-@utility status-chip { display: inline-flex; align-items: center; gap: .4rem; background: var(--color-primary-soft); color: var(--color-primary); padding: .4rem .6rem; font-family: var(--font-mono); font-size: .62rem; text-transform: uppercase; }
-@utility form-field { display: flex; flex-direction: column; gap: .5rem; font-size: .8rem; font-weight: 600; }
+/* ══════════════════════ TYPE SCALE ══════════════════════
+   Measured from the reference: 80/78/−3.4px at display,
+   34/36/−1.7px at section heads, 18/25 at body.            */
 
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+@utility t-display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6.2vw, 5rem);      /* 44 → 80 */
+  line-height: 0.96;
+  letter-spacing: -0.043em;
+  font-weight: 400;
+}
+@utility t-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.4vw, 3.5rem);    /* 36 → 56 */
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  font-weight: 400;
+}
+@utility t-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 2.9vw, 2.125rem);  /* 28 → 34 */
+  line-height: 1.06;
+  letter-spacing: -0.038em;
+  font-weight: 400;
+}
+@utility t-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1.9vw, 1.5rem);   /* 22 → 24 */
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+}
+@utility t-h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  letter-spacing: -0.018em;
+  font-weight: 400;
+}
+@utility t-lead {
+  font-size: clamp(1.125rem, 1.5vw, 1.25rem);  /* 18 → 20 */
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+}
+@utility t-body   { font-size: 1.125rem; line-height: 1.45; }   /* 18/26 */
+@utility t-small  { font-size: 1rem;     line-height: 1.45; }   /* 16/23 */
+@utility t-micro  { font-size: 0.8125rem; line-height: 1.5; }   /* 13 */
+
+/* The micro-caps label. 10px mono, +0.05em, uppercase. Used for
+   eyebrows, index markers, provenance, and every technical annotation. */
+@utility t-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  line-height: 1.6;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+@utility t-label-lg {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+@utility t-index {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════ LAYOUT ══════════════════════ */
+
+@utility shell {
+  width: 100%;
+  max-width: 84.5rem;              /* 1352px — the measured container */
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 48rem)  { padding-inline: 2.5rem; }
+  @media (min-width: 90rem)  { padding-inline: 2.5rem; }
+}
+@utility shell-narrow {
+  width: 100%;
+  max-width: 52rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (min-width: 48rem) { padding-inline: 2.5rem; }
+}
+@utility band {
+  padding-block: 4.5rem;
+  @media (min-width: 48rem) { padding-block: 6rem; }
+  @media (min-width: 64rem) { padding-block: 7.5rem; }
+}
+@utility band-tight {
+  padding-block: 3rem;
+  @media (min-width: 64rem) { padding-block: 4rem; }
+}
+@utility rule    { border-top: 1px solid var(--line); }
+@utility rule-inverse { border-top: 1px solid var(--line-inverse); }
+
+/* ══════════════════════ ACTIONS ══════════════════════
+   Measured: 40px tall, 16px/400, radius 0, 1px border.   */
+
+@utility btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 2.75rem; padding: 0.625rem 1.375rem;
+  font-size: 0.9375rem; font-weight: 400; line-height: 1.2;
+  border: 1px solid transparent; border-radius: 0;
+  transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+  white-space: nowrap;
+}
+@utility btn-solid {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+  &:hover { background: var(--brand); border-color: var(--brand); }
+}
+@utility btn-outline {
+  background: transparent; color: var(--ink); border-color: var(--ink);
+  &:hover { background: var(--ink); color: var(--paper); }
+}
+@utility btn-on-dark {
+  background: var(--paper); color: var(--ink); border-color: var(--paper);
+  &:hover { background: transparent; color: var(--paper); }
+}
+@utility btn-ghost-on-dark {
+  background: transparent; color: var(--inverse); border-color: var(--line-inverse);
+  &:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.34); }
+}
+
+/* The underlined arrow link — the reference's standard tertiary action */
+@utility link-arrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.9375rem; line-height: 1.4;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.2rem;
+  transition: gap .2s ease, opacity .2s ease;
+  &:hover { gap: 0.875rem; }
+}
+
+/* ══════════════════════ SIGNATURE DEVICES ══════════════════════ */
+
+/* /0.1 — the numbered capability row */
+@utility index-row {
+  display: grid; gap: 1.5rem;
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--line);
+  @media (min-width: 64rem) {
+    grid-template-columns: 15rem 1fr;
+    gap: 4rem; padding-block: 3.25rem;
+  }
+}
+
+/* The notch-cornered card — corner cut, as on the reference quote cards */
+@utility notch {
+  clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 1.5rem, 100% 100%, 0 100%);
+}
+
+/* The twin mega CTA block */
+@utility mega-cta {
+  display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 15rem; padding: 1.75rem 1.5rem 1.75rem;
+  border-radius: 4px;
+  transition: transform .25s ease, background-color .25s ease;
+  @media (min-width: 64rem) { min-height: 17.5rem; padding: 2rem; }
+}
+
+/* Inset tint hero panel — interior page headers */
+@utility inset-panel {
+  border-radius: 4px;
+  background: var(--tint);
+  position: relative;
+  overflow: hidden;
+}
+
+/* The isometric diamond mesh used behind tint panels */
+@utility mesh {
+  background-image:
+    linear-gradient(45deg, rgba(27,42,78,.05) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(27,42,78,.05) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+@utility mesh-inverse {
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+/* Pill tab switcher — Record · Verify · Publish · Challenge · Correct */
+@utility pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.5rem 1.125rem; border-radius: 999px;
+  font-size: 0.875rem; line-height: 1.2; font-weight: 400;
+  border: 1px solid var(--line-strong); color: var(--graphite);
+  background: transparent;
+  transition: all .18s ease;
+  &:hover { border-color: var(--ink); color: var(--ink); }
+}
+@utility pill-active {
+  background: var(--ink); border-color: var(--ink); color: var(--paper);
+  &:hover { color: var(--paper); }
+}
+@utility pill-on-dark {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.5rem 1.125rem; border-radius: 999px;
+  font-size: 0.875rem; line-height: 1.2; font-weight: 400;
+  border: 1px solid var(--line-inverse); color: var(--inverse-dim);
+  background: transparent; transition: all .18s ease;
+  &:hover { border-color: rgba(255,255,255,.4); color: var(--inverse); }
+}
+@utility pill-on-dark-active {
+  background: var(--paper); border-color: var(--paper); color: var(--ink);
+  &:hover { color: var(--ink); }
+}
+
+/* The provenance chip — a figure without one does not render */
+@utility chip {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.02em;
+  border-bottom: 1px dotted currentColor;
+  cursor: pointer; vertical-align: baseline;
+  transition: opacity .15s ease;
+  &:hover { opacity: .7; }
+}
+
+/* The boundary panel — seal reservation */
+@utility boundary {
+  border-left: 2px solid var(--seal);
+  background: var(--seal-tint);
+  padding: 2rem 1.5rem;
+  @media (min-width: 64rem) { padding: 3rem 3.5rem; }
+}
+
+/* Series issue card — two-panel colour card with micro rails */
+@utility issue-card {
+  display: grid; border-radius: 2px; overflow: hidden;
+  min-height: 15rem;
+  @media (min-width: 40rem) { grid-template-columns: 1fr 1.15fr; }
+}
+
+/* Numeric display for figures — always tabular */
+@utility figure-num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

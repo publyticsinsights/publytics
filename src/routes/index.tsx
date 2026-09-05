@@ -1,19 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteHeader } from "@/components/publytics/SiteHeader";
-import { Hero } from "@/components/publytics/Hero";
+import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/publytics/chrome";
 import {
-  AudienceSection,
-  ProductsSection,
   AiSection,
-  ServicesSection,
-  RigourSection,
+  ArgumentSection,
+  AudienceIndex,
+  BoundarySection,
   CtaSection,
-} from "@/components/publytics/sections";
-import { SiteFooter } from "@/components/publytics/SiteFooter";
+  EvidenceSection,
+  Hero,
+  PlatformSection,
+  RigourSection,
+  SystemsSection,
+  VoicesSection,
+} from "@/components/publytics/home";
 
-const TITLE = "Publytics — Public-Interest Data & AI";
+const TITLE = "Publytics — Public Proof";
 const DESCRIPTION =
-  "Publytics builds rigorous data and AI infrastructure for government, enterprise, and civic or research institutions.";
+  "When a citizen asks whether the promise was kept, who answers? Publytics builds the data and AI infrastructure that public institutions run on.";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -24,10 +27,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: TITLE },
-      { name: "twitter:description", content: DESCRIPTION },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [
@@ -38,9 +38,9 @@ export const Route = createFileRoute("/")({
           "@type": "Organization",
           name: "Publytics",
           description: DESCRIPTION,
-          slogan: "Public-interest data infrastructure",
+          slogan: "Public Proof",
           areaServed: "India",
-          knowsAbout: ["GovTech", "Civic data", "Responsible AI", "Regulatory technology", "Policy research"],
+          knowsAbout: ["Civic data infrastructure", "GovTech", "Responsible AI", "Regulatory technology", "Policy research"],
         }),
       },
     ],
@@ -49,15 +49,20 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
-      <SiteHeader />
+    <div className="min-h-screen bg-paper">
+      <AnnouncementBar />
+      <SiteHeader tone="dark" />
       <main>
         <Hero />
-        <AudienceSection />
-        <ProductsSection />
+        <AudienceIndex />
+        <ArgumentSection />
+        <PlatformSection />
+        <SystemsSection />
         <AiSection />
-        <ServicesSection />
         <RigourSection />
+        <EvidenceSection />
+        <VoicesSection />
+        <BoundarySection />
         <CtaSection />
       </main>
       <SiteFooter />

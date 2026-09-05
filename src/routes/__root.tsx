@@ -12,22 +12,40 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const SITEMAP: [string, string][] = [
+  ["Public Proof", "/public-proof"],
+  ["Solutions", "/solutions"],
+  ["Products", "/products"],
+  ["Services & Programmes", "/services"],
+  ["Evidence", "/evidence"],
+  ["Trust", "/trust"],
+  ["Company", "/company"],
+  ["Contact", "/company"],
+];
+
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+    <div className="flex min-h-screen flex-col bg-paper">
+      <div className="shell flex flex-1 flex-col justify-center py-24">
+        <p className="t-label text-steel">Error 404</p>
+        <h1 className="t-display-xl mt-6 max-w-3xl">
+          This page has moved, or never existed.
+        </h1>
+        <p className="t-lead mt-7 max-w-lg text-graphite">
+          Here is the sitemap, and here is how to reach a person.
         </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
+
+        <nav aria-label="Sitemap" className="mt-14 grid max-w-4xl gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {SITEMAP.map(([label, href]) => (
+            <Link key={label} to={href} className="bg-paper px-5 py-5 text-[0.9375rem] text-graphite transition-colors hover:text-ink">
+              {label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="mt-12 flex flex-wrap gap-3">
+          <Link to="/" className="btn btn-solid">Return to the homepage</Link>
+          <Link to="/company" hash="contact" className="btn btn-outline">Reach a person</Link>
         </div>
       </div>
     </div>
@@ -42,30 +60,24 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+    <div className="flex min-h-screen flex-col bg-paper">
+      <div className="shell flex flex-1 flex-col justify-center py-24">
+        <p className="t-label text-steel">Something went wrong</p>
+        <h1 className="t-display mt-6 max-w-2xl">This page did not load.</h1>
+        <p className="t-lead mt-6 max-w-lg text-graphite">
+          The fault is on our side, not yours. You can try again, or reach a person directly.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-10 flex flex-wrap gap-3">
           <button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn btn-solid"
           >
             Try again
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
+          <a href="/" className="btn btn-outline">Return to the homepage</a>
         </div>
       </div>
     </div>
@@ -77,11 +89,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Publytics — Public-Interest Data & AI" },
+      { title: "Publytics — Public Proof" },
       {
         name: "description",
         content:
-          "Publytics builds rigorous data and AI infrastructure for government, enterprise, and civic or research institutions.",
+          "Publytics builds the data and AI infrastructure that public institutions run on — the layer between government, the people it serves, and the organisations that work alongside both.",
       },
       { name: "author", content: "Publytics" },
       { property: "og:site_name", content: "Publytics" },
@@ -97,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Tamil:wght@400;500&display=swap",
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
