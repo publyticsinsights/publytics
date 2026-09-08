@@ -180,7 +180,7 @@ export function SiteHeader({
 
         {/* Contextual sub-navigation for interior sections */}
         {subnav && (
-          <div className={`${scrolled ? "" : "bg-transparent"}`}>
+          <div className={`transition-colors duration-200 ${scrolled ? "border-b border-line bg-paper/92 backdrop-blur-xl" : "bg-paper"}`}>
             <div className="shell">
               <nav aria-label="Section navigation" className="flex flex-wrap gap-x-6 gap-y-1 py-3">
                 {subnav.map((s) => (

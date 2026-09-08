@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, X } from "lucide-react";
 import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/publytics/chrome";
-import { PlatformStack } from "@/components/publytics/PlatformStack";
+import { ProductCore } from "@/components/publytics/ProductCore";
 import {
   DisclosureTriptych,
   Eyebrow,
@@ -81,15 +81,22 @@ function ProductsPage() {
           <div className="inset-panel mesh px-6 py-12 lg:px-12 lg:py-16">
             <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
               <div>
-                <Eyebrow tone="steel">The five layers</Eyebrow>
+                <Eyebrow tone="steel">One shared core</Eyebrow>
                 <h2 className="t-h2 mt-6">Every product addresses the same architecture.</h2>
                 <p className="t-small mt-5 max-w-md text-graphite">
                   A department can buy one family and use it alone. What makes the second purchase cheaper than the
                   first is that both sit on the same record model, the same ledger, and the same language layer.
                 </p>
+                <p className="t-micro mt-5 max-w-md text-steel">
+                  Six families across three systems, resolving to one core — which is why integration is a
+                  configuration exercise rather than a second implementation.
+                </p>
               </div>
               <div className="rounded bg-ink p-4 lg:p-6">
-                <PlatformStack className="h-auto w-full" />
+                <ProductCore className="h-auto w-full" />
+                <p className="t-label mt-2 text-center text-inverse-faint">
+                  Architecture diagram · illustrative
+                </p>
               </div>
             </div>
           </div>
