@@ -14,7 +14,14 @@ import {
 import { OFFERINGS } from "@/content/offerings";
 import { segmentBySlug } from "@/content/segments";
 import { LEVEL_LABEL, segmentsForOffering } from "@/content/matrices";
-import { pageHead } from "@/content/site";
+import {
+  ORG_ID,
+  absoluteUrl,
+  breadcrumbLd,
+  ldScript,
+  metaDescription,
+  pageHead,
+} from "@/content/site";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
@@ -22,14 +29,54 @@ export const Route = createFileRoute("/services/$slug")({
     if (!offering) throw notFound();
     return offering;
   },
-  head: ({ loaderData }) =>
-    loaderData
-      ? pageHead({
-          title: `${loaderData.name} | Publytics ${loaderData.kind === "service" ? "Services" : "Programmes"}`,
-          description: `${loaderData.shape} ${loaderData.summary}`.slice(0, 300),
-          path: `/services/${loaderData.slug}`,
-        })
-      : {},
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const o = loaderData;
+    const path = `/services/${o.slug}`;
+    const kind = o.kind === "service" ? "Services" : "Programmes";
+    const service: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: o.name,
+      description: metaDescription(`${o.shape} ${o.summary}`),
+      url: absoluteUrl(path),
+      provider: { "@id": ORG_ID },
+      areaServed: "IN",
+    };
+    if (o.priceINR) {
+      service["offers"] = {
+        "@type": "Offer",
+        url: absoluteUrl(path),
+        priceCurrency: "INR",
+        ...(o.priceINR.max === 0
+          ? { price: "0" }
+          : {
+              priceSpecification: {
+                "@type": "PriceSpecification",
+                priceCurrency: "INR",
+                minPrice: o.priceINR.min,
+                maxPrice: o.priceINR.max,
+              },
+            }),
+      };
+    }
+    return {
+      ...pageHead({
+        title: `${o.name} | Publytics ${kind}`,
+        description: `${o.shape} ${o.summary}`,
+        path,
+      }),
+      scripts: [
+        ldScript(
+          breadcrumbLd([
+            { name: "Services & Programmes", path: "/services" },
+            { name: o.name, path },
+          ]),
+        ),
+        ldScript(service),
+      ],
+    };
+  },
   component: OfferingPage,
 });
 

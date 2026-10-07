@@ -4,6 +4,7 @@ import { PageFrame } from "@/components/publytics/chrome";
 import { BriefingForm } from "@/components/publytics/BriefingForm";
 import { Eyebrow } from "@/components/publytics/system";
 import {
+  JsonLd,
   Breadcrumb,
   FactStrip,
   FaqList,
@@ -21,7 +22,7 @@ import { offeringBySlug } from "@/content/offerings";
 import { evidenceBySlug } from "@/content/evidence";
 import { evidenceHref } from "@/content/nav";
 import { FIT_LABEL, LEVEL_LABEL, offeringFit, productFit } from "@/content/matrices";
-import { pageHead } from "@/content/site";
+import { breadcrumbLd, faqLd, ldScript, pageHead } from "@/content/site";
 
 export const Route = createFileRoute("/solutions/$slug")({
   // The loader validates against the light metadata only. Loaders are not
@@ -32,14 +33,26 @@ export const Route = createFileRoute("/solutions/$slug")({
     if (!meta) throw notFound();
     return meta;
   },
-  head: ({ loaderData }) =>
-    loaderData
-      ? pageHead({
-          title: `${loaderData.name} | Publytics Solutions`,
-          description: loaderData.summary,
-          path: `/solutions/${loaderData.slug}`,
-        })
-      : {},
+  // head() is NOT code-split: it may touch only the light metadata.
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const path = `/solutions/${loaderData.slug}`;
+    return {
+      ...pageHead({
+        title: `${loaderData.name} | Publytics Solutions`,
+        description: loaderData.summary,
+        path,
+      }),
+      scripts: [
+        ldScript(
+          breadcrumbLd([
+            { name: "Solutions", path: "/solutions" },
+            { name: loaderData.name, path },
+          ]),
+        ),
+      ],
+    };
+  },
   component: SegmentPage,
 });
 
@@ -62,6 +75,7 @@ function SegmentPage() {
 
   return (
     <PageFrame section="Solutions" subnav={SUBNAV}>
+      <JsonLd data={faqLd(s.faqs)} />
       {/* ── Header ── */}
       <header className="shell relative pt-10 pb-14 lg:pt-14 lg:pb-20">
         <span

@@ -9,6 +9,7 @@ import type { Offering, OfferingSlug } from "./types";
 export const OFFERINGS: Offering[] = [
   {
     slug: "briefing",
+    priceINR: { min: 0, max: 0 },
     kind: "service",
     name: "The Briefing",
     shape: "90 minutes. Your problem, framed. No deck.",
@@ -27,6 +28,7 @@ export const OFFERINGS: Offering[] = [
   },
   {
     slug: "bootcamp",
+    priceINR: { min: 200000, max: 400000 },
     kind: "service",
     name: "The Bootcamp",
     shape: "One day. Your own data. One working monitor by close.",
@@ -42,6 +44,7 @@ export const OFFERINGS: Offering[] = [
   },
   {
     slug: "record-model-workshop",
+    priceINR: { min: 800000, max: 1200000 },
     kind: "service",
     name: "Record Model Workshop",
     shape: "One week. Declares your record types and obligations.",
@@ -61,6 +64,7 @@ export const OFFERINGS: Offering[] = [
   },
   {
     slug: "dpdp-readiness-assessment",
+    priceINR: { min: 600000, max: 1200000 },
     kind: "service",
     name: "DPDP Readiness Assessment",
     shape: "3–4 weeks. Data map, DPIA, consent architecture, gap plan to 13 May 2027.",
@@ -81,6 +85,7 @@ export const OFFERINGS: Offering[] = [
   },
   {
     slug: "methodology-audit",
+    priceINR: { min: 400000, max: 800000 },
     kind: "service",
     name: "Methodology Audit",
     shape: "External review of your published tracker or dashboard, against the Method Standard.",
@@ -118,6 +123,7 @@ export const OFFERINGS: Offering[] = [
   },
   {
     slug: "use-case-boost",
+    priceINR: { min: 500000, max: 1000000 },
     kind: "service",
     name: "Use Case Boost",
     shape: "High-touch acceleration for your own team.",

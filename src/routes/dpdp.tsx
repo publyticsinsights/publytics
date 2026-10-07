@@ -8,7 +8,7 @@ import { FACTS } from "@/content/dates";
 import { familyBySlug } from "@/content/families";
 import { offeringBySlug } from "@/content/offerings";
 import { segmentBySlug } from "@/content/segments";
-import { pageHead } from "@/content/site";
+import { faqLd, ldScript, pageHead } from "@/content/site";
 import type { DatedFact, SegmentSlug } from "@/content/types";
 
 const TITLE = "DPDP 2027 Readiness — Dates Corrected, Evidence Built | Publytics";
@@ -17,7 +17,10 @@ const DESCRIPTION =
 
 export const Route = createFileRoute("/dpdp")({
   component: DpdpPage,
-  head: () => pageHead({ title: TITLE, description: DESCRIPTION, path: "/dpdp" }),
+  head: () => ({
+    ...pageHead({ title: TITLE, description: DESCRIPTION, path: "/dpdp" }),
+    scripts: [ldScript(faqLd(FAQS))],
+  }),
 });
 
 const SUBNAV = [
@@ -50,8 +53,33 @@ const WHO: SegmentSlug[] = [
   "legislatures",
 ];
 
+const ASSESSMENT = offeringBySlug("dpdp-readiness-assessment");
+
+const FAQS = [
+  {
+    q: "Did MeitY shorten the deadline?",
+    a: "A January 2026 proposal to shorten the 18-month window to 12 months was not notified as of September 2026. We plan to 13 May 2027 and keep a date chip on every claim, so if that changes, this page changes with its source.",
+  },
+  {
+    q: "When do Significant Data Fiduciary audits start?",
+    a: "With every other obligation, on 13 May 2027 — not in the first quarter of 2027, as this site previously said. The correction is published at /evidence/corrections.",
+  },
+  {
+    q: "Is this legal advice?",
+    a: "No. The assessment produces the evidence your counsel and DPO need — data map, DPIA, consent architecture, gap plan — but it does not determine whether you are compliant or replace legal counsel.",
+  },
+  {
+    q: "Do you act as a Consent Manager?",
+    a: "No. Rule 4 registration requires ₹2 crore net worth and the space has registered providers. Compliance & Regtech integrates with their consent records.",
+  },
+  {
+    q: "What does the assessment cost, and is it credited?",
+    a: `${ASSESSMENT.band}, ex-GST, for ${ASSESSMENT.duration}. It is credited toward the first year of Compliance & Regtech.`,
+  },
+];
+
 function DpdpPage() {
-  const assessment = offeringBySlug("dpdp-readiness-assessment");
+  const assessment = ASSESSMENT;
   const platform = familyBySlug("compliance-regtech");
   const dates = [
     {
@@ -68,28 +96,6 @@ function DpdpPage() {
       f: FACTS.dpdpFull,
       t: "Every other obligation",
       b: "18 months after notification, including Significant Data Fiduciary duties — the annual DPIA and audit under Rule 13. Penalties up to ₹250 crore.",
-    },
-  ];
-  const faqs = [
-    {
-      q: "Did MeitY shorten the deadline?",
-      a: "A January 2026 proposal to shorten the 18-month window to 12 months was not notified as of September 2026. We plan to 13 May 2027 and keep a date chip on every claim, so if that changes, this page changes with its source.",
-    },
-    {
-      q: "When do Significant Data Fiduciary audits start?",
-      a: "With every other obligation, on 13 May 2027 — not in the first quarter of 2027, as this site previously said. The correction is published at /evidence/corrections.",
-    },
-    {
-      q: "Is this legal advice?",
-      a: "No. The assessment produces the evidence your counsel and DPO need — data map, DPIA, consent architecture, gap plan — but it does not determine whether you are compliant or replace legal counsel.",
-    },
-    {
-      q: "Do you act as a Consent Manager?",
-      a: "No. Rule 4 registration requires ₹2 crore net worth and the space has registered providers. Compliance & Regtech integrates with their consent records.",
-    },
-    {
-      q: "What does the assessment cost, and is it credited?",
-      a: `${assessment.band}, ex-GST, for ${assessment.duration}. It is credited toward the first year of Compliance & Regtech.`,
     },
   ];
 
@@ -247,7 +253,7 @@ function DpdpPage() {
               <Eyebrow tone="steel">Questions</Eyebrow>
               <h2 className="t-h2 mt-6">What DPOs and CISOs ask first.</h2>
             </div>
-            <FaqList items={faqs} />
+            <FaqList items={FAQS} />
           </div>
         </div>
       </section>

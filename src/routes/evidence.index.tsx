@@ -1,7 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { PageFrame } from "@/components/publytics/chrome";
-import { Eyebrow, IntegrityChecklist, IssueCard, MegaCta, ProvenanceChip, Say, Statement } from "@/components/publytics/system";
+import {
+  Eyebrow,
+  IntegrityChecklist,
+  IssueCard,
+  MegaCta,
+  ProvenanceChip,
+  Say,
+  Statement,
+} from "@/components/publytics/system";
 import { SectionHead, StatusBadge } from "@/components/publytics/atlas";
 import { EVIDENCE } from "@/content/evidence";
 import { evidenceHref } from "@/content/nav";
@@ -33,25 +41,54 @@ function EvidencePage() {
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-end lg:gap-16">
           <h1 className="t-display-xl">Research built to be read, cited, and challenged.</h1>
           <p className="t-lead max-w-md text-graphite lg:pb-2">
-            A field note is evidence of practice. A tracker is evidence of method. An impact study is evidence of outcome. Anything
-            that is none of the three does not belong in this section.
+            A field note is evidence of practice. A tracker is evidence of method. An impact study
+            is evidence of outcome. Anything that is none of the three does not belong in this
+            section.
           </p>
         </div>
       </header>
 
       <section id="live" className="shell scroll-mt-32 pb-16 lg:pb-24">
+        <h2 className="sr-only">Live now</h2>
         <div className="grid gap-4 lg:grid-cols-2">
-          <Link to="/evidence/method-standard" className="block transition-opacity hover:opacity-95">
-            <IssueCard issue="01" title="The Method Standard" subtitle="Five items. Certify your output against them, whoever you are." theme="teal" status="v1.0 · 4 Sep 2026" />
+          <Link
+            to="/evidence/method-standard"
+            className="block transition-opacity hover:opacity-95"
+          >
+            <IssueCard
+              issue="01"
+              title="The Method Standard"
+              subtitle="Five items. Certify your output against them, whoever you are."
+              theme="teal"
+              status="v1.0 · 4 Sep 2026"
+            />
           </Link>
           <Link to="/evidence/refusal-log" className="block transition-opacity hover:opacity-95">
-            <IssueCard issue="02" title="The Refusal Log" subtitle="Every engagement declined under the boundary, anonymised and dated." theme="seal" status="Log open" />
+            <IssueCard
+              issue="02"
+              title="The Refusal Log"
+              subtitle="Every engagement declined under the boundary, anonymised and dated."
+              theme="seal"
+              status="Log open"
+            />
           </Link>
           <Link to="/evidence/corrections" className="block transition-opacity hover:opacity-95">
-            <IssueCard issue="03" title="Corrections" subtitle="Our errors, published at the original address before someone else finds them." theme="slate" status="Policy live" />
+            <IssueCard
+              issue="03"
+              title="Corrections"
+              subtitle="Our errors, published at the original address before someone else finds them."
+              theme="slate"
+              status="Policy live"
+            />
           </Link>
           <Link to="/public-proof" className="block transition-opacity hover:opacity-95">
-            <IssueCard issue="04" title="Publytics Is Not a Dashboard Company" subtitle="A dashboard reports a state. Evidence records a chain." theme="indigo" status="The argument" />
+            <IssueCard
+              issue="04"
+              title="Publytics Is Not a Dashboard Company"
+              subtitle="A dashboard reports a state. Evidence records a chain."
+              theme="indigo"
+              status="The argument"
+            />
           </Link>
         </div>
         <p className="t-micro mt-5 text-steel">
@@ -83,7 +120,10 @@ function EvidencePage() {
                     </div>
                   </div>
                   {evidenceHref(e.slug).startsWith("/evidence/") && (
-                    <Link to={evidenceHref(e.slug)} className="link-arrow mt-6 shrink-0 text-ink lg:mt-2">
+                    <Link
+                      to={evidenceHref(e.slug)}
+                      className="link-arrow mt-6 shrink-0 text-ink lg:mt-2"
+                    >
                       Open <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                     </Link>
                   )}
@@ -100,22 +140,35 @@ function EvidencePage() {
           <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
             <div>
               <Eyebrow tone="inverse">A dated commitment</Eyebrow>
-              <h2 className="t-display mt-6 text-inverse">Publytics Tracker 1 publishes on 31 March 2027.</h2>
+              <h2 className="t-display mt-6 text-inverse">
+                Publytics Tracker 1 publishes on 31 March 2027.
+              </h2>
               <p className="mt-6 [&_.chip]:text-inverse-dim">
-                <ProvenanceChip source={FACTS.tracker1.source} method={FACTS.tracker1.method} date={FACTS.tracker1.date} limitations={FACTS.tracker1.limitations!} />
+                <ProvenanceChip
+                  source={FACTS.tracker1.source}
+                  method={FACTS.tracker1.method}
+                  date={FACTS.tracker1.date}
+                  limitations={FACTS.tracker1.limitations!}
+                />
               </p>
             </div>
             <div>
               <p className="t-body text-inverse-dim">
-                The first public edition, on the date we announced in advance: a versioned dataset, its method, the commissioning
-                party, a stated error rate, and — from the second edition — a diff against the one before.
+                The first public edition, on the date we announced in advance: a versioned dataset,
+                its method, the commissioning party, a stated error rate, and — from the second
+                edition — a diff against the one before.
               </p>
               <p className="t-body mt-5 text-inverse-dim">
-                A commitment is not an achievement. If the date moves, the change is published here, with the reason, before the
-                date arrives.
+                A commitment is not an achievement. If the date moves, the change is published here,
+                with the reason, before the date arrives.
               </p>
-              <Link to="/services/$slug" params={{ slug: "tracker-network" }} className="btn btn-on-dark mt-9">
-                Run your own edition — the Tracker Network <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              <Link
+                to="/services/$slug"
+                params={{ slug: "tracker-network" }}
+                className="btn btn-on-dark mt-9"
+              >
+                Run your own edition — the Tracker Network{" "}
+                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </Link>
             </div>
           </div>
@@ -129,8 +182,8 @@ function EvidencePage() {
               <Eyebrow tone="steel">The standard</Eyebrow>
               <h2 className="t-h2 mt-6">Certify your output against it, whoever you are.</h2>
               <p className="t-body mt-6 max-w-md text-graphite">
-                The Method Standard is open and versioned. Every published output — ours, or any Tracker Network licensee’s — is
-                checked against the same five items before it ships.
+                The Method Standard is open and versioned. Every published output — ours, or any
+                Tracker Network licensee’s — is checked against the same five items before it ships.
               </p>
               <Link to="/evidence/method-standard" className="link-arrow mt-8 text-ink">
                 Read the standard <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
@@ -144,8 +197,8 @@ function EvidencePage() {
       <section className="rule bg-surface">
         <div className="shell band">
           <Statement>
-            A company that publishes its own error rate before a critic finds it, and its own refusals before a journalist asks, has{" "}
-            <Say>pre-empted both stories</Say>.
+            A company that publishes its own error rate before a critic finds it, and its own
+            refusals before a journalist asks, has <Say>pre-empted both stories</Say>.
           </Statement>
           <div className="mt-14">
             <MegaCta />

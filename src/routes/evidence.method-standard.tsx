@@ -5,7 +5,7 @@ import { Eyebrow, MegaCta } from "@/components/publytics/system";
 import { Breadcrumb, FactStrip, SectionHead, StatusBadge } from "@/components/publytics/atlas";
 import { METHOD_STANDARD } from "@/content/evidence";
 import { offeringBySlug } from "@/content/offerings";
-import { pageHead } from "@/content/site";
+import { ORG_ID, absoluteUrl, breadcrumbLd, ldScript, pageHead } from "@/content/site";
 
 const TITLE = "The Method Standard v1.0 — Five Items | Publytics";
 const DESCRIPTION =
@@ -13,8 +13,29 @@ const DESCRIPTION =
 
 export const Route = createFileRoute("/evidence/method-standard")({
   component: MethodStandardPage,
-  head: () =>
-    pageHead({ title: TITLE, description: DESCRIPTION, path: "/evidence/method-standard" }),
+  head: () => ({
+    ...pageHead({ title: TITLE, description: DESCRIPTION, path: "/evidence/method-standard" }),
+    scripts: [
+      ldScript(
+        breadcrumbLd([
+          { name: "Evidence", path: "/evidence" },
+          { name: "The Method Standard", path: "/evidence/method-standard" },
+        ]),
+      ),
+      ldScript({
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        headline: "The Method Standard",
+        version: METHOD_STANDARD.version,
+        datePublished: "2026-09-04",
+        inLanguage: "en-IN",
+        url: absoluteUrl("/evidence/method-standard"),
+        author: { "@id": ORG_ID },
+        publisher: { "@id": ORG_ID },
+        description: DESCRIPTION,
+      }),
+    ],
+  }),
 });
 
 function MethodStandardPage() {

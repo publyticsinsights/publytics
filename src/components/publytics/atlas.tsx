@@ -10,6 +10,15 @@ import { FAMILY_ORDER, FIT_LABEL, LEVEL_LABEL, productFit } from "@/content/matr
 import type { Fit, ProductFit, SegmentSlug, Status, SystemId } from "@/content/types";
 import { Eyebrow } from "./system";
 
+/** Structured data rendered in the body — for schema whose source data
+   lives in a code-split chunk. head() must stay on light metadata only,
+   because route head/loader code is NOT split. */
+export function JsonLd({ data }: { data: unknown }) {
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  );
+}
+
 /* ══════════════════════════════════════════════════════════
    SYSTEM KEY
    ══════════════════════════════════════════════════════════ */

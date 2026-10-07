@@ -139,6 +139,8 @@ export interface Offering {
   summary: string;
   /** Published band, or null when priced on scoping. */
   band: string | null;
+  /** The band as numbers (INR), for Offer structured data. Only ever the published band. */
+  priceINR?: { min: number; max: number };
   /** The credit rule, stated. */
   credit?: string;
   duration: string;
