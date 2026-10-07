@@ -108,6 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Publytics builds the data and AI infrastructure that public institutions run on — the layer between government, the people it serves, and the organisations that work alongside both.",
       },
       { name: "author", content: "Publytics" },
+      { name: "google-site-verification", content: "RMSQNM_M5TuiwW2v0R2lJ8dTKpUdiznctBNWbG3UluI" },
       { property: "og:site_name", content: "Publytics" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
