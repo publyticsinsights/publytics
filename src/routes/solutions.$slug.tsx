@@ -63,7 +63,13 @@ function SegmentPage() {
   return (
     <PageFrame section="Solutions" subnav={SUBNAV}>
       {/* ── Header ── */}
-      <header className="shell pt-10 pb-14 lg:pt-14 lg:pb-20">
+      <header className="shell relative pt-10 pb-14 lg:pt-14 lg:pb-20">
+        <span
+          aria-hidden="true"
+          className="ghost-num absolute top-14 right-6 -z-10 hidden 2xl:block"
+        >
+          {s.index}
+        </span>
         <Breadcrumb trail={[{ label: "Solutions", href: "/solutions" }, { label: s.name }]} />
         <div className="mt-10 grid gap-12 lg:grid-cols-[1.35fr_1fr] lg:items-end lg:gap-16">
           <div>
@@ -78,7 +84,9 @@ function SegmentPage() {
           </div>
           <figure className="notch bg-ink p-7 text-inverse lg:p-8">
             <Eyebrow tone="inverse">The question that starts the engagement</Eyebrow>
-            <blockquote className="t-h3 mt-8 text-inverse">“{s.question.quote}”</blockquote>
+            <blockquote className="t-h3 t-serif-i mt-8 text-inverse">
+              “{s.question.quote}”
+            </blockquote>
             <figcaption className="t-label mt-8 text-inverse-faint">— {s.question.by}</figcaption>
           </figure>
         </div>

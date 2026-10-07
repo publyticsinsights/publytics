@@ -94,7 +94,7 @@ function EvidencePage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink text-inverse">
+      <section className="relative overflow-hidden atmo text-inverse">
         <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
         <div className="shell band relative">
           <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">

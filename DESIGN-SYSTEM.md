@@ -1,6 +1,6 @@
-# Publytics Design System v3
+# Publytics Design System v4 — "the Atlas, published"
 
-Derived from a measured analysis of the reference set (`Publitics Ref web` captures + palantir.com live audit), applied to the content architecture in `publytics-web.md`.
+v3 derived the structural system from a measured Palantir audit. v4 (Oct 2026) recasts it in the **GTM Atlas's own editorial identity**: warm paper, Newsreader serif display with an italic champagne accent, mono annotations, dot-matrix texture, and dark "cover" sections with system-colour glows and film grain. The hierarchy rules (weight 400 everywhere, hairlines, radius 0) are unchanged — emphasis in display type is the serif *italic*, never a weight bump.
 
 ---
 
@@ -33,11 +33,11 @@ These are measured values, not impressions. Taken from computed styles on palant
 
 ## 2. Publytics tokens
 
-Neutrals carry a faint blue-violet cast so they read as chosen, not defaulted.
+v4 neutrals are warm — ink-and-paper, like the Atlas — not blue-screen grey. Paper `#FAF8F4`, line `#E4DFD3`, tint `#F3EFE5`. **Champagne** `#CBB488` (dark grounds) / `#8A6D3E` (light) is the Atlas cover's accent: serif-italic display emphasis, ghost numerals and commitment markers only — never buttons, never body text.
 
 | Token | Value | Use |
 |---|---|---|
-| `ink` | `#1B1E26` | Primary text, dark surfaces |
+| `ink` | `#1C1B17` (v4, warm) | Primary text, dark surfaces |
 | `ink-raised` | `#23262E` | Raised surface on dark |
 | `ink-deep` | `#14161C` | Announcement bar, deepest ground |
 | `surface` | `#FFFFFF` | Cards, reading surface |
@@ -83,7 +83,7 @@ Used **only** on system tags (`.sys-tag`), matrix headers, fit marks and diagram
 | Small | `t-small` | 16 / 1.45 |
 | Label | `t-label` | 10 / uppercase / +0.09em / mono |
 
-**Faces:** Inter Tight (display) · Inter (text) · IBM Plex Mono (labels, data) — the closest open equivalents to the Alliance No.2 / No.1 / Apercu Mono pairing. Tamil: Noto Sans Tamil, set one step larger at 1.8 leading, never uppercase, never letter-spaced.
+**Faces (v4):** Newsreader, opsz pinned at 42 (display serif, roman + italic — the open Tiempos equivalent, matching the Atlas) · Inter (text, UI, H4 and below) · IBM Plex Mono (labels, data). Tamil: Noto Sans Tamil, set one step larger at 1.8 leading, never uppercase, never letter-spaced. The serif is reserved for display sizes (H3 up), exactly as the Atlas reserves it for headlines.
 
 ---
 

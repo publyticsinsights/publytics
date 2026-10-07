@@ -14,7 +14,15 @@ import {
   Say,
   Statement,
 } from "./system";
-import { CreditLadder, DatedTimeline, SectionHead, SolutionMatrix, StatusBadge, SystemTag, SystemsMap } from "./atlas";
+import {
+  CreditLadder,
+  DatedTimeline,
+  SectionHead,
+  SolutionMatrix,
+  StatusBadge,
+  SystemTag,
+  SystemsMap,
+} from "./atlas";
 import { SEGMENT_LIST as SEGMENTS } from "@/content/segments/meta";
 import { CORE } from "@/content/systems";
 import { EVIDENCE } from "@/content/evidence";
@@ -44,7 +52,7 @@ export function Hero() {
     { k: "TN low-value line", v: FACTS.tnLowValue.value, fact: FACTS.tnLowValue },
   ];
   return (
-    <section className="relative -mt-[5rem] overflow-hidden bg-ink pt-[5rem] sm:-mt-[5.75rem] sm:pt-[5.75rem] text-inverse">
+    <section className="relative -mt-[5rem] overflow-hidden atmo pt-[5rem] sm:-mt-[5.75rem] sm:pt-[5.75rem] text-inverse">
       <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
       <div
         aria-hidden="true"
@@ -54,10 +62,18 @@ export function Hero() {
       <div className="shell relative grid gap-14 pt-16 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pt-20 lg:pb-24">
         <div>
           <Eyebrow tone="inverse">Public Proof</Eyebrow>
-          <h1 className="t-display-xl mt-7 text-inverse">When a citizen asks whether the promise was kept, who answers?</h1>
+          <h1 className="t-display-xl mt-7 text-inverse">
+            When a citizen asks whether the promise was kept —{" "}
+            <em className="t-serif-i text-accent">who answers?</em>
+          </h1>
           <p className="t-lead mt-8 max-w-xl text-inverse-dim">
-            Publytics builds the data and AI infrastructure public institutions run on: one evidence chain from what was
-            committed to what was delivered — verified, dated, in Tamil, and able to survive a challenge.
+            Publytics builds the data and AI infrastructure public institutions run on: one evidence
+            chain from what was committed to what was delivered — verified, dated, in Tamil, and
+            able to survive a challenge.
+          </p>
+          <p className="t-label mt-7 text-inverse-faint">
+            Eight institutions · Six product families ·{" "}
+            <span className="text-accent">One evidence chain</span>
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link to="/solutions" className="btn btn-on-dark">
@@ -71,7 +87,9 @@ export function Hero() {
 
         <div className="relative">
           <PlatformStack className="h-auto w-full" />
-          <p className="t-label mt-2 text-center text-inverse-faint">The shared core · five layers · illustrative</p>
+          <p className="t-label mt-2 text-center text-inverse-faint">
+            The shared core · five layers · illustrative
+          </p>
         </div>
       </div>
 
@@ -112,21 +130,36 @@ export function InstitutionsSection() {
               key={s.slug}
               to="/solutions/$slug"
               params={{ slug: s.slug }}
-              className="group flex min-h-[19rem] flex-col bg-surface p-6 transition-colors hover:bg-tint"
+              className="group card-lift relative flex min-h-[19rem] flex-col bg-surface p-6"
             >
               <div className="flex items-center justify-between gap-3">
                 <span className="t-index text-silver">/{s.index}</span>
                 <span className="flex flex-wrap justify-end gap-3">
                   {s.systems.map((id) => (
-                    <SystemTag key={id} id={id} label={id === "delivery" ? "Delivery" : id === "obligation" ? "Obligation" : "Accountability"} />
+                    <SystemTag
+                      key={id}
+                      id={id}
+                      label={
+                        id === "delivery"
+                          ? "Delivery"
+                          : id === "obligation"
+                            ? "Obligation"
+                            : "Accountability"
+                      }
+                    />
                   ))}
                 </span>
               </div>
               <h3 className="t-h4 mt-8">{s.name}</h3>
-              <p className="t-micro mt-4 text-graphite">“{s.question.quote}”</p>
+              <p className="t-serif-i mt-4 text-[1.0625rem] leading-snug text-graphite">
+                “{s.question.quote}”
+              </p>
               <span className="mt-auto flex items-center gap-2 pt-8 text-[0.875rem] text-ink">
                 <span className="border-b border-current pb-0.5">See the pathway</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                <ArrowRight
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  strokeWidth={1.5}
+                />
               </span>
             </Link>
           ))}
@@ -143,19 +176,21 @@ export function ArgumentSection() {
     <section className="rule bg-surface">
       <div className="shell band">
         <Statement>
-          Most institutions can report <Say>what they announced</Say> and <Say>what they spent</Say>. Almost none can show{" "}
-          <Say>the chain between them</Say>.
+          Most institutions can report <Say>what they announced</Say> and <Say>what they spent</Say>
+          . Almost none can show <Say>the chain between them</Say>.
         </Statement>
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16" data-reveal>
           <div className="max-w-xl">
             <p className="t-body text-graphite">
-              The gap is structural, not personal. A department can produce a budget line and a press release. It usually cannot
-              produce, on demand and in the language the citizen speaks, the record that connects the two — what was committed,
-              what was verified, by whom, when, and with what stated limits.
+              The gap is structural, not personal. A department can produce a budget line and a
+              press release. It usually cannot produce, on demand and in the language the citizen
+              speaks, the record that connects the two — what was committed, what was verified, by
+              whom, when, and with what stated limits.
             </p>
             <p className="t-body mt-5 text-graphite">
-              That is not a reporting problem. It is an infrastructure problem — and it is the one we build for.
+              That is not a reporting problem. It is an infrastructure problem — and it is the one
+              we build for.
             </p>
             <Link to="/public-proof" className="link-arrow mt-8 text-ink">
               Read the full argument <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
@@ -194,9 +229,9 @@ export function PlatformSection() {
             <Eyebrow tone="steel">The shared core</Eyebrow>
             <h3 className="t-h2 mt-6">Five layers beneath every product.</h3>
             <p className="t-small mt-5 max-w-sm text-graphite">
-              Three are ours outright — the record model, the evidence ledger and the disclosure gate — with the Tamil civic
-              evaluation set inside the language layer. The rest is assembled on open Indic models and India’s public digital
-              infrastructure.
+              Three are ours outright — the record model, the evidence ledger and the disclosure
+              gate — with the Tamil civic evaluation set inside the language layer. The rest is
+              assembled on open Indic models and India’s public digital infrastructure.
             </p>
             <Link to="/products" className="link-arrow mt-8 text-ink">
               The platform <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
@@ -238,7 +273,7 @@ export function SolutionMapSection() {
 
 export function LadderSection() {
   return (
-    <section className="relative overflow-hidden bg-ink text-inverse">
+    <section className="relative overflow-hidden atmo text-inverse">
       <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
       <div className="shell band relative">
         <SectionHead
@@ -278,23 +313,32 @@ export function CalendarSection() {
           <DatedTimeline tone="light" />
         </div>
         <div className="mt-14 grid gap-3 md:grid-cols-2">
-          <Link to="/dpdp" className="group flex items-end justify-between gap-6 border border-line bg-surface p-6 transition-colors hover:bg-tint">
+          <Link
+            to="/dpdp"
+            className="group card-lift flex items-end justify-between gap-6 border border-line bg-surface p-6"
+          >
             <span>
               <span className="t-label text-steel">Enterprise · GCCs · Regulators</span>
               <span className="t-h3 mt-3 block">DPDP readiness, before 13 May 2027</span>
             </span>
-            <ArrowRight className="mb-1 h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={1.25} />
+            <ArrowRight
+              className="mb-1 h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1"
+              strokeWidth={1.25}
+            />
           </Link>
           <Link
             to="/evidence"
             hash="trackers"
-            className="group flex items-end justify-between gap-6 border border-line bg-surface p-6 transition-colors hover:bg-tint"
+            className="group card-lift flex items-end justify-between gap-6 border border-line bg-surface p-6"
           >
             <span>
               <span className="t-label text-steel">Government · Municipal · Research</span>
               <span className="t-h3 mt-3 block">Publytics Tracker 1, on 31 March 2027</span>
             </span>
-            <ArrowRight className="mb-1 h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={1.25} />
+            <ArrowRight
+              className="mb-1 h-5 w-5 shrink-0 transition-transform group-hover:translate-x-1"
+              strokeWidth={1.25}
+            />
           </Link>
         </div>
       </div>
@@ -306,16 +350,18 @@ export function CalendarSection() {
 
 export function AiSection() {
   return (
-    <section className="relative overflow-hidden bg-ink text-inverse">
+    <section className="relative overflow-hidden atmo text-inverse">
       <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
       <div className="shell band relative">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
           <div>
             <Eyebrow tone="inverse">AI at Publytics</Eyebrow>
-            <h2 className="t-h2 mt-6 text-inverse">Every product uses AI somewhere. We state exactly where — and where it does not.</h2>
+            <h2 className="t-h2 mt-6 text-inverse">
+              Every product uses AI somewhere. We state exactly where — and where it does not.
+            </h2>
             <p className="t-small mt-6 max-w-md text-inverse-dim">
-              Institutional trust requires bounded systems, not broad claims. Each product publishes its own disclosure, and the
-              disclosure gate blocks a workflow that cannot produce one.
+              Institutional trust requires bounded systems, not broad claims. Each product publishes
+              its own disclosure, and the disclosure gate blocks a workflow that cannot produce one.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link to="/trust" hash="ai-principles" className="btn btn-on-dark">
@@ -338,10 +384,16 @@ export function AiSection() {
               t: "Tamil-first, benchmarked",
               b: "Built for Tamil, code-mixed, dialect and transliterated civic text, with a Tamil civic evaluation set so accuracy can be checked before acceptance.",
             },
-            { t: "Data stays bounded", b: "Client data is never used to train models outside the client’s governed environment. Residency is written into the contract." },
-            { t: "Non-partisan by design", b: "We do not sell political targeting or persuasion systems to parties or candidates — and we log what we decline." },
+            {
+              t: "Data stays bounded",
+              b: "Client data is never used to train models outside the client’s governed environment. Residency is written into the contract.",
+            },
+            {
+              t: "Non-partisan by design",
+              b: "We do not sell political targeting or persuasion systems to parties or candidates — and we log what we decline.",
+            },
           ].map((c) => (
-            <div key={c.t} className="bg-ink p-7">
+            <div key={c.t} className="border border-line-inverse bg-ink-raised/55 p-7">
               <h3 className="t-h4 text-inverse">{c.t}</h3>
               <p className="t-micro mt-3 text-inverse-dim">{c.b}</p>
             </div>
@@ -361,11 +413,15 @@ export function EvidenceSection() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start lg:gap-16">
           <div>
             <Eyebrow tone="steel">Why trust a young company</Eyebrow>
-            <h2 className="t-h2 mt-6">The method is part of the product — and it is already public.</h2>
+            <h2 className="t-h2 mt-6">
+              The method is part of the product — and it is already public.
+            </h2>
             <p className="t-body mt-6 max-w-md text-graphite">
-              A field note proves practice. A tracker proves method. An impact study proves outcome. Until our first tracker ships on{" "}
-              <span className="text-ink">31 March 2027</span> <Chip fact={FACTS.tracker1} />, the strongest proofs are the ones live
-              today: the Method Standard, the refusal log, and a corrections policy that publishes our errors first.
+              A field note proves practice. A tracker proves method. An impact study proves outcome.
+              Until our first tracker ships on <span className="text-ink">31 March 2027</span>{" "}
+              <Chip fact={FACTS.tracker1} />, the strongest proofs are the ones live today: the
+              Method Standard, the refusal log, and a corrections policy that publishes our errors
+              first.
             </p>
             <Link to="/evidence/method-standard" className="link-arrow mt-8 text-ink">
               The Method Standard, v1.0 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
@@ -375,14 +431,23 @@ export function EvidenceSection() {
         </div>
 
         <div className="mt-16 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-4" data-reveal>
-          {EVIDENCE.filter((e) => e.slug !== "method-standard").slice(0, 4).map((e) => (
-            <Link key={e.slug} to={evidenceHref(e.slug)} className="group flex min-h-[13rem] flex-col bg-paper p-6 transition-colors hover:bg-tint">
-              <StatusBadge status={e.status} label={e.statusLabel} />
-              <h3 className="t-h4 mt-6">{e.name}</h3>
-              <p className="t-micro mt-3 text-graphite">{e.rule}</p>
-              <ArrowUpRight className="mt-auto h-4 w-4 self-end text-steel transition-colors group-hover:text-ink" strokeWidth={1.5} />
-            </Link>
-          ))}
+          {EVIDENCE.filter((e) => e.slug !== "method-standard")
+            .slice(0, 4)
+            .map((e) => (
+              <Link
+                key={e.slug}
+                to={evidenceHref(e.slug)}
+                className="group card-lift flex min-h-[13rem] flex-col bg-paper p-6"
+              >
+                <StatusBadge status={e.status} label={e.statusLabel} />
+                <h3 className="t-h4 mt-6">{e.name}</h3>
+                <p className="t-micro mt-3 text-graphite">{e.rule}</p>
+                <ArrowUpRight
+                  className="mt-auto h-4 w-4 self-end text-steel transition-colors group-hover:text-ink"
+                  strokeWidth={1.5}
+                />
+              </Link>
+            ))}
         </div>
       </div>
     </section>
@@ -398,12 +463,14 @@ export function BoundarySection() {
         <BoundaryPanel>
           <h2 className="t-h2 text-seal">We sell to institutions. Never to contestants.</h2>
           <p className="t-body mt-6 max-w-2xl text-ink">
-            Publytics does not provide political targeting or persuasion systems to political parties or candidates.
+            Publytics does not provide political targeting or persuasion systems to political
+            parties or candidates.
           </p>
           <p className="t-small mt-4 max-w-2xl text-graphite">
-            Where our buyer is an elected representative, the engagement is with the public office — paid from public funds,
-            discharging public duties, and its outputs pass to that office’s successor. Where an output concerns an election, it is
-            published openly or not produced at all.
+            Where our buyer is an elected representative, the engagement is with the public office —
+            paid from public funds, discharging public duties, and its outputs pass to that office’s
+            successor. Where an output concerns an election, it is published openly or not produced
+            at all.
           </p>
           <div className="mt-8 flex flex-wrap gap-6">
             <Link to="/trust" hash="boundary" className="link-arrow text-seal">
@@ -430,10 +497,12 @@ export function CtaSection() {
         <div className="mt-20 grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
             <Eyebrow tone="steel">Start a conversation</Eyebrow>
-            <h2 className="t-h2 mt-6">Bring us the institutional question — not a software shopping list.</h2>
+            <h2 className="t-h2 mt-6">
+              Bring us the institutional question — not a software shopping list.
+            </h2>
             <p className="t-body mt-6 max-w-md text-graphite">
-              Every first meeting is the free Briefing: 90 minutes on one commitment, obligation or figure you cannot evidence
-              today. No deck.
+              Every first meeting is the free Briefing: 90 minutes on one commitment, obligation or
+              figure you cannot evidence today. No deck.
             </p>
           </div>
           <BriefingForm />

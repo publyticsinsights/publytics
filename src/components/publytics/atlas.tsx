@@ -294,7 +294,7 @@ export function CreditLadder({ tone = "light" }: { tone?: "light" | "dark" }) {
                 style={{ maxWidth: `${(i + 1) * 16}%` }}
               />
             </div>
-            <h3 className={`t-h4 mt-8 ${dark ? "text-inverse" : ""}`}>{r.title}</h3>
+            <h3 className={`t-h3 mt-8 ${dark ? "text-inverse" : ""}`}>{r.title}</h3>
             <p
               className={`figure-num mt-auto pt-8 font-mono text-[0.8125rem] ${dark ? "text-inverse" : "text-ink"}`}
             >
@@ -345,19 +345,19 @@ export function DatedTimeline({ tone = "dark" }: { tone?: "light" | "dark" }) {
             className={`relative z-10 block h-3.5 w-3.5 rounded-full border-2 ${
               c.kind === "commitment"
                 ? dark
-                  ? "border-live-bright bg-ink"
-                  : "border-live bg-paper"
+                  ? "border-accent bg-ink"
+                  : "border-accent-deep bg-paper"
                 : dark
                   ? "border-inverse bg-inverse"
                   : "border-ink bg-ink"
             }`}
           />
-          <p
-            className={`figure-num mt-5 font-mono text-[0.8125rem] ${dark ? "text-inverse" : "text-ink"}`}
+          <p className={`t-h3 mt-5 ${dark ? "text-inverse" : "text-ink"}`}>{c.date}</p>
+          <h3
+            className={`mt-2.5 text-[0.9375rem] leading-snug ${dark ? "text-inverse" : "text-ink"}`}
           >
-            {c.date}
-          </p>
-          <h3 className={`t-h4 mt-2 ${dark ? "text-inverse" : ""}`}>{c.title}</h3>
+            {c.title}
+          </h3>
           <p className={`t-micro mt-2 ${dark ? "text-inverse-dim" : "text-graphite"}`}>{c.body}</p>
           <p className={`t-label mt-4 ${dark ? "text-inverse-faint" : "text-steel"}`}>
             {KIND_LABEL[c.kind]}

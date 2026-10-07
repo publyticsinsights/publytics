@@ -152,7 +152,7 @@ function EngagePage() {
         </div>
       </header>
 
-      <section id="ladder" className="relative scroll-mt-32 overflow-hidden bg-ink text-inverse">
+      <section id="ladder" className="relative scroll-mt-32 overflow-hidden atmo text-inverse">
         <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
         <div className="shell band relative">
           <SectionHead
@@ -306,7 +306,7 @@ function EngagePage() {
         </div>
       </section>
 
-      <section id="calendar" className="relative scroll-mt-32 overflow-hidden bg-ink text-inverse">
+      <section id="calendar" className="relative scroll-mt-32 overflow-hidden atmo text-inverse">
         <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
         <div className="shell band relative">
           <SectionHead

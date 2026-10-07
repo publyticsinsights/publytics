@@ -70,7 +70,10 @@ function FamilyPage() {
 
   return (
     <PageFrame section="Products" subnav={SUBNAV}>
-      <header className="shell pt-10 pb-14 lg:pt-14 lg:pb-20" style={sysStyle(f.system)}>
+      <header className="shell relative pt-10 pb-14 lg:pt-14 lg:pb-20" style={sysStyle(f.system)}>
+        <span aria-hidden="true" className="ghost-num absolute top-12 right-6 hidden xl:block">
+          {f.index}
+        </span>
         <Breadcrumb trail={[{ label: "Products", href: "/products" }, { label: f.name }]} />
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-end lg:gap-16">
           <div>
@@ -162,10 +165,7 @@ function FamilyPage() {
         </div>
       </section>
 
-      <section
-        id="disclosure"
-        className="relative scroll-mt-32 overflow-hidden bg-ink text-inverse"
-      >
+      <section id="disclosure" className="relative scroll-mt-32 overflow-hidden atmo text-inverse">
         <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
         <div className="shell band relative">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">

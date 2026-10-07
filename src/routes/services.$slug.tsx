@@ -143,7 +143,7 @@ function OfferingPage() {
       )}
 
       {o.kind === "service" && (
-        <section className="relative overflow-hidden bg-ink text-inverse">
+        <section className="relative overflow-hidden atmo text-inverse">
           <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
           <div className="shell band relative">
             <SectionHead

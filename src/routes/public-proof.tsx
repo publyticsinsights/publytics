@@ -131,7 +131,7 @@ function PublicProofPage() {
         </section>
 
         {/* The operating loop */}
-        <section id="loop" className="relative scroll-mt-32 overflow-hidden bg-ink text-inverse">
+        <section id="loop" className="relative scroll-mt-32 overflow-hidden atmo text-inverse">
           <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
           <div className="shell band relative">
             <Eyebrow tone="inverse">The operating loop</Eyebrow>
