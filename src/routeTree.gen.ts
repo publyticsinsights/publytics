@@ -11,12 +11,20 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CompanyRouteImport } from './routes/company'
-import { Route as EvidenceRouteImport } from './routes/evidence'
-import { Route as ProductsRouteImport } from './routes/products'
+import { Route as DpdpRouteImport } from './routes/dpdp'
+import { Route as EngageRouteImport } from './routes/engage'
 import { Route as PublicProofRouteImport } from './routes/public-proof'
-import { Route as ServicesRouteImport } from './routes/services'
-import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as TrustRouteImport } from './routes/trust'
+import { Route as EvidenceIndexRouteImport } from './routes/evidence.index'
+import { Route as EvidenceCorrectionsRouteImport } from './routes/evidence.corrections'
+import { Route as EvidenceMethodStandardRouteImport } from './routes/evidence.method-standard'
+import { Route as EvidenceRefusalLogRouteImport } from './routes/evidence.refusal-log'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as SolutionsIndexRouteImport } from './routes/solutions.index'
+import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,14 +36,14 @@ const CompanyRoute = CompanyRouteImport.update({
   path: '/company',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EvidenceRoute = EvidenceRouteImport.update({
-  id: '/evidence',
-  path: '/evidence',
+const DpdpRoute = DpdpRouteImport.update({
+  id: '/dpdp',
+  path: '/dpdp',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsRoute = ProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
+const EngageRoute = EngageRouteImport.update({
+  id: '/engage',
+  path: '/engage',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PublicProofRoute = PublicProofRouteImport.update({
@@ -43,95 +51,191 @@ const PublicProofRoute = PublicProofRouteImport.update({
   path: '/public-proof',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SolutionsRoute = SolutionsRouteImport.update({
-  id: '/solutions',
-  path: '/solutions',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TrustRoute = TrustRouteImport.update({
   id: '/trust',
   path: '/trust',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvidenceIndexRoute = EvidenceIndexRouteImport.update({
+  id: '/evidence/',
+  path: '/evidence/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvidenceCorrectionsRoute = EvidenceCorrectionsRouteImport.update({
+  id: '/evidence/corrections',
+  path: '/evidence/corrections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvidenceMethodStandardRoute = EvidenceMethodStandardRouteImport.update({
+  id: '/evidence/method-standard',
+  path: '/evidence/method-standard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvidenceRefusalLogRoute = EvidenceRefusalLogRouteImport.update({
+  id: '/evidence/refusal-log',
+  path: '/evidence/refusal-log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsSlugRoute = ProductsSlugRouteImport.update({
+  id: '/products/$slug',
+  path: '/products/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsIndexRoute = SolutionsIndexRouteImport.update({
+  id: '/solutions/',
+  path: '/solutions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
+  id: '/solutions/$slug',
+  path: '/solutions/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/company': typeof CompanyRoute
-  '/evidence': typeof EvidenceRoute
-  '/products': typeof ProductsRoute
+  '/dpdp': typeof DpdpRoute
+  '/engage': typeof EngageRoute
   '/public-proof': typeof PublicProofRoute
-  '/services': typeof ServicesRoute
-  '/solutions': typeof SolutionsRoute
   '/trust': typeof TrustRoute
+  '/evidence/corrections': typeof EvidenceCorrectionsRoute
+  '/evidence/method-standard': typeof EvidenceMethodStandardRoute
+  '/evidence/refusal-log': typeof EvidenceRefusalLogRoute
+  '/products/$slug': typeof ProductsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/evidence/': typeof EvidenceIndexRoute
+  '/products/': typeof ProductsIndexRoute
+  '/services/': typeof ServicesIndexRoute
+  '/solutions/': typeof SolutionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/company': typeof CompanyRoute
-  '/evidence': typeof EvidenceRoute
-  '/products': typeof ProductsRoute
+  '/dpdp': typeof DpdpRoute
+  '/engage': typeof EngageRoute
   '/public-proof': typeof PublicProofRoute
-  '/services': typeof ServicesRoute
-  '/solutions': typeof SolutionsRoute
   '/trust': typeof TrustRoute
+  '/evidence/corrections': typeof EvidenceCorrectionsRoute
+  '/evidence/method-standard': typeof EvidenceMethodStandardRoute
+  '/evidence/refusal-log': typeof EvidenceRefusalLogRoute
+  '/products/$slug': typeof ProductsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/evidence': typeof EvidenceIndexRoute
+  '/products': typeof ProductsIndexRoute
+  '/services': typeof ServicesIndexRoute
+  '/solutions': typeof SolutionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/company': typeof CompanyRoute
-  '/evidence': typeof EvidenceRoute
-  '/products': typeof ProductsRoute
+  '/dpdp': typeof DpdpRoute
+  '/engage': typeof EngageRoute
   '/public-proof': typeof PublicProofRoute
-  '/services': typeof ServicesRoute
-  '/solutions': typeof SolutionsRoute
   '/trust': typeof TrustRoute
+  '/evidence/corrections': typeof EvidenceCorrectionsRoute
+  '/evidence/method-standard': typeof EvidenceMethodStandardRoute
+  '/evidence/refusal-log': typeof EvidenceRefusalLogRoute
+  '/products/$slug': typeof ProductsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/evidence/': typeof EvidenceIndexRoute
+  '/products/': typeof ProductsIndexRoute
+  '/services/': typeof ServicesIndexRoute
+  '/solutions/': typeof SolutionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/company'
-    | '/evidence'
-    | '/products'
+    | '/dpdp'
+    | '/engage'
     | '/public-proof'
-    | '/services'
-    | '/solutions'
     | '/trust'
+    | '/evidence/corrections'
+    | '/evidence/method-standard'
+    | '/evidence/refusal-log'
+    | '/products/$slug'
+    | '/services/$slug'
+    | '/solutions/$slug'
+    | '/evidence/'
+    | '/products/'
+    | '/services/'
+    | '/solutions/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/company'
+    | '/dpdp'
+    | '/engage'
+    | '/public-proof'
+    | '/trust'
+    | '/evidence/corrections'
+    | '/evidence/method-standard'
+    | '/evidence/refusal-log'
+    | '/products/$slug'
+    | '/services/$slug'
+    | '/solutions/$slug'
     | '/evidence'
     | '/products'
-    | '/public-proof'
     | '/services'
     | '/solutions'
-    | '/trust'
   id:
     | '__root__'
     | '/'
     | '/company'
-    | '/evidence'
-    | '/products'
+    | '/dpdp'
+    | '/engage'
     | '/public-proof'
-    | '/services'
-    | '/solutions'
     | '/trust'
+    | '/evidence/corrections'
+    | '/evidence/method-standard'
+    | '/evidence/refusal-log'
+    | '/products/$slug'
+    | '/services/$slug'
+    | '/solutions/$slug'
+    | '/evidence/'
+    | '/products/'
+    | '/services/'
+    | '/solutions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CompanyRoute: typeof CompanyRoute
-  EvidenceRoute: typeof EvidenceRoute
-  ProductsRoute: typeof ProductsRoute
+  DpdpRoute: typeof DpdpRoute
+  EngageRoute: typeof EngageRoute
   PublicProofRoute: typeof PublicProofRoute
-  ServicesRoute: typeof ServicesRoute
-  SolutionsRoute: typeof SolutionsRoute
   TrustRoute: typeof TrustRoute
+  EvidenceCorrectionsRoute: typeof EvidenceCorrectionsRoute
+  EvidenceMethodStandardRoute: typeof EvidenceMethodStandardRoute
+  EvidenceRefusalLogRoute: typeof EvidenceRefusalLogRoute
+  ProductsSlugRoute: typeof ProductsSlugRoute
+  ServicesSlugRoute: typeof ServicesSlugRoute
+  SolutionsSlugRoute: typeof SolutionsSlugRoute
+  EvidenceIndexRoute: typeof EvidenceIndexRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
+  SolutionsIndexRoute: typeof SolutionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,18 +254,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/evidence': {
-      id: '/evidence'
-      path: '/evidence'
-      fullPath: '/evidence'
-      preLoaderRoute: typeof EvidenceRouteImport
+    '/dpdp': {
+      id: '/dpdp'
+      path: '/dpdp'
+      fullPath: '/dpdp'
+      preLoaderRoute: typeof DpdpRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products': {
-      id: '/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsRouteImport
+    '/engage': {
+      id: '/engage'
+      path: '/engage'
+      fullPath: '/engage'
+      preLoaderRoute: typeof EngageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/public-proof': {
@@ -171,25 +275,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicProofRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/solutions': {
-      id: '/solutions'
-      path: '/solutions'
-      fullPath: '/solutions'
-      preLoaderRoute: typeof SolutionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/trust': {
       id: '/trust'
       path: '/trust'
       fullPath: '/trust'
       preLoaderRoute: typeof TrustRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evidence/': {
+      id: '/evidence/'
+      path: '/evidence'
+      fullPath: '/evidence/'
+      preLoaderRoute: typeof EvidenceIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evidence/corrections': {
+      id: '/evidence/corrections'
+      path: '/evidence/corrections'
+      fullPath: '/evidence/corrections'
+      preLoaderRoute: typeof EvidenceCorrectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evidence/method-standard': {
+      id: '/evidence/method-standard'
+      path: '/evidence/method-standard'
+      fullPath: '/evidence/method-standard'
+      preLoaderRoute: typeof EvidenceMethodStandardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evidence/refusal-log': {
+      id: '/evidence/refusal-log'
+      path: '/evidence/refusal-log'
+      fullPath: '/evidence/refusal-log'
+      preLoaderRoute: typeof EvidenceRefusalLogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/$slug': {
+      id: '/products/$slug'
+      path: '/products/$slug'
+      fullPath: '/products/$slug'
+      preLoaderRoute: typeof ProductsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/': {
+      id: '/solutions/'
+      path: '/solutions'
+      fullPath: '/solutions/'
+      preLoaderRoute: typeof SolutionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions/$slug': {
+      id: '/solutions/$slug'
+      path: '/solutions/$slug'
+      fullPath: '/solutions/$slug'
+      preLoaderRoute: typeof SolutionsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -198,12 +358,20 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CompanyRoute: CompanyRoute,
-  EvidenceRoute: EvidenceRoute,
-  ProductsRoute: ProductsRoute,
+  DpdpRoute: DpdpRoute,
+  EngageRoute: EngageRoute,
   PublicProofRoute: PublicProofRoute,
-  ServicesRoute: ServicesRoute,
-  SolutionsRoute: SolutionsRoute,
   TrustRoute: TrustRoute,
+  EvidenceCorrectionsRoute: EvidenceCorrectionsRoute,
+  EvidenceMethodStandardRoute: EvidenceMethodStandardRoute,
+  EvidenceRefusalLogRoute: EvidenceRefusalLogRoute,
+  ProductsSlugRoute: ProductsSlugRoute,
+  ServicesSlugRoute: ServicesSlugRoute,
+  SolutionsSlugRoute: SolutionsSlugRoute,
+  EvidenceIndexRoute: EvidenceIndexRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
+  SolutionsIndexRoute: SolutionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

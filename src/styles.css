@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./fonts.css";
 
 /* ══════════════════════════════════════════════════════════════════════
    PUBLYTICS DESIGN SYSTEM  ·  v3
@@ -55,6 +56,11 @@
   --color-seal-mark: var(--seal-mark);
   --color-seal-tint: var(--seal-tint);
 
+  /* system key — Delivery / Obligation / Accountability */
+  --color-sys-delivery: var(--sys-delivery);
+  --color-sys-obligation: var(--sys-obligation);
+  --color-sys-accountability: var(--sys-accountability);
+
   /* shadcn compatibility aliases */
   --color-card: var(--surface); --color-card-foreground: var(--ink);
   --color-popover: var(--surface); --color-popover-foreground: var(--ink);
@@ -106,6 +112,17 @@
   --seal:      #8E2A1F;
   --seal-mark: #A8382A;
   --seal-tint: #F7E8E4;
+
+  /* ── System key (GTM Atlas): one hue per system the buyer purchases.
+     Used ONLY on system tags, matrix headers and diagram strokes —
+     never for live data (verdigris) or refusals (seal), never on buttons.
+     Petrol, ochre and indigo are chosen to stay distinct from both. ── */
+  --sys-delivery:       #22668A;
+  --sys-obligation:     #A8601F;
+  --sys-accountability: #4B48A6;
+  --sys-delivery-dark:       #6FB3D6;
+  --sys-obligation-dark:     #E0A15E;
+  --sys-accountability-dark: #A3A1EE;
 }
 
 @layer base {
@@ -271,6 +288,8 @@
   border: 1px solid transparent; border-radius: 0;
   transition: background-color .18s ease, color .18s ease, border-color .18s ease;
   white-space: nowrap;
+  /* On phones a long label wraps rather than forcing its column wider than the screen. */
+  @media (max-width: 40rem) { white-space: normal; text-align: left; }
 }
 @utility btn-solid {
   background: var(--ink); color: var(--paper); border-color: var(--ink);
@@ -406,7 +425,37 @@
   letter-spacing: -0.03em;
 }
 
+/* Fit marks — the Atlas matrix notation. Filled = primary/high,
+   half = secondary/medium, ring = optional/low, dash = not offered. */
+@utility fit-dot {
+  display: inline-block; width: 0.8125rem; height: 0.8125rem; border-radius: 999px;
+  border: 1.5px solid currentColor; flex-shrink: 0;
+}
+@utility fit-full { background: currentColor; }
+@utility fit-half { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+@utility fit-none { border: 0; width: 0.75rem; height: 1.5px; border-radius: 0; background: var(--line-strong); }
+
+/* Tag carrying a system key colour via --sys */
+@utility sys-tag {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: var(--font-mono); font-size: 0.625rem; line-height: 1.6;
+  letter-spacing: 0.09em; text-transform: uppercase; font-weight: 500;
+  color: var(--sys, var(--steel));
+  &::before { content: ""; width: 0.5rem; height: 0.5rem; background: var(--sys, var(--steel)); }
+}
+
+/* Subtle entrance. Content is visible without JS; the class is only
+   added by script, so no-JS and reduced-motion readers see everything. */
+.reveal-armed { opacity: 0; transform: translateY(14px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal-armed.reveal-in { opacity: 1; transform: none; }
+
+/* Details/summary FAQ */
+.faq summary { list-style: none; cursor: pointer; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq[open] .faq-icon { transform: rotate(45deg); }
+
 @media (prefers-reduced-motion: reduce) {
+  .reveal-armed { opacity: 1 !important; transform: none !important; }
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: .01ms !important;

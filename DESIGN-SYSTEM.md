@@ -56,6 +56,18 @@ Neutrals carry a faint blue-violet cast so they read as chosen, not defaulted.
 
 > A visitor who spends four minutes on the site should be able to state the colour rule without being told it.
 
+### System key (added with the GTM Atlas rebuild, Oct 2026)
+
+One hue per **system the buyer purchases**, taken from the Atlas legend (teal Delivery, rust Obligation, indigo Accountability) and shifted so it never collides with the two reserved colours:
+
+| Token | Value | Means |
+|---|---|---|
+| `sys-delivery` | `#22668A` petrol | Delivery system — Civic Data, GovTech Workflow |
+| `sys-obligation` | `#A8601F` ochre | Obligation system — Compliance & Regtech |
+| `sys-accountability` | `#4B48A6` indigo | Accountability system — Research & Policy, Narrative & Media, Fundraising & CSR |
+
+Used **only** on system tags (`.sys-tag`), matrix headers, fit marks and diagram strokes — never on buttons, never for live data, never for refusals.
+
 ---
 
 ## 3. Type
@@ -89,7 +101,13 @@ Neutrals carry a faint blue-violet cast so they read as chosen, not defaulted.
 | **Notch card** | Cut-corner quote cards | Institutional questions, procurement facts |
 | **Inset tint panel** | Ontology hero | Platform architecture feature |
 | **Exploded isometric stack** | Ontology layer diagram | The five platform layers, mono leader lines |
-| **Full-screen menu** | Palantir hamburger | Seven-item IA |
+| **Full-screen menu** | Palantir hamburger | Full index, derived from the content registries |
+| **Fit marks** | Atlas matrix notation | ● primary/high · ◐ secondary/medium · ○ optional/low · — not offered |
+| **Solution matrix** | Atlas Matrix A | Institution × product family, every cell derived from `content/matrices.ts` |
+| **Credit ladder** | Atlas §09 | Briefing → Bootcamp → Workshop/Assessment → Pilot → Annual → Expand, with published bands |
+| **Dated timeline** | Atlas §08 | Statutory dates and Publytics commitments, each with its provenance |
+| **Status badge** | — | live (verdigris) · open · scheduled · in preparation · in scoping — status is stated, never implied |
+| **Command palette** | — | ⌘K / Ctrl+K / "/" search over every page; loaded on first use |
 
 ---
 
@@ -113,3 +131,21 @@ A page does not ship unless:
 5. Contrast, keyboard path and focus states pass; the page renders with JS disabled.
 6. It is inside the performance budget, measured.
 7. If in the Tamil launch scope, the Tamil version ships with it.
+
+
+---
+
+## 7. Content architecture (Oct 2026)
+
+Every page renders from typed registries in `src/content/`, mirroring the GTM Atlas data model — a **segment** buys **product families**, enters through **services & programmes**, and is shown **evidence**:
+
+| File | Holds |
+|---|---|
+| `types.ts` | The model, with the public-content rule: only published bands are prices |
+| `segments/meta.ts` + `segments/*.ts` | The eight institutions — light fields (menus, cards, search) apart from the full deep-dives (code-split) |
+| `families.ts` · `offerings.ts` · `evidence.ts` | Six families, seven services + four programmes, seven kinds of evidence |
+| `matrices.ts` | Atlas Matrices A–C. Every "who leads with what" on the site is derived from here |
+| `systems.ts` · `dates.ts` | Three systems + five core layers; every cited date with its provenance |
+| `nav.ts` | Menu, footer and search index — derived, so a new registry entry appears everywhere |
+
+A fact is stated once. Pages never type a list the registries already hold.

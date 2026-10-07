@@ -17,10 +17,11 @@ const SITEMAP: [string, string][] = [
   ["Solutions", "/solutions"],
   ["Products", "/products"],
   ["Services & Programmes", "/services"],
+  ["How to engage", "/engage"],
+  ["DPDP 2027", "/dpdp"],
   ["Evidence", "/evidence"],
   ["Trust", "/trust"],
   ["Company", "/company"],
-  ["Contact", "/company"],
 ];
 
 function NotFoundComponent() {
@@ -99,18 +100,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Publytics" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#1B1E26" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Tamil:wght@400;500&display=swap",
-      },
+      // Fonts are self-hosted (src/fonts.css): no third-party requests.
+      { rel: "preload", href: "/fonts/inter-latin-567244.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", href: "/fonts/inter-tight-latin-1bf6b3.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
   }),
@@ -123,7 +122,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <HeadContent />
       </head>
