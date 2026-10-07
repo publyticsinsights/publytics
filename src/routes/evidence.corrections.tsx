@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { PageFrame } from "@/components/publytics/chrome";
 import { CorrectionNotice, Eyebrow, MegaCta } from "@/components/publytics/system";
 import { Breadcrumb, SectionHead, StatusBadge } from "@/components/publytics/atlas";
-import { CONTENT_AS_OF, pageHead } from "@/content/site";
+import { breadcrumbLd, ldScript, CONTENT_AS_OF, pageHead } from "@/content/site";
 
 const TITLE = "Error Rates & Corrections | Publytics";
 const DESCRIPTION =
@@ -11,7 +11,17 @@ const DESCRIPTION =
 
 export const Route = createFileRoute("/evidence/corrections")({
   component: CorrectionsPage,
-  head: () => pageHead({ title: TITLE, description: DESCRIPTION, path: "/evidence/corrections" }),
+  head: () => ({
+    ...pageHead({ title: TITLE, description: DESCRIPTION, path: "/evidence/corrections" }),
+    scripts: [
+      ldScript(
+        breadcrumbLd([
+          { name: "Evidence", path: "/evidence" },
+          { name: "Error rates & corrections", path: "/evidence/corrections" },
+        ]),
+      ),
+    ],
+  }),
 });
 
 /* Corrections to this website itself. Each is permanent; nothing is edited away.

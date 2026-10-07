@@ -4,7 +4,7 @@ import { PageFrame } from "@/components/publytics/chrome";
 import { BoundaryPanel, Eyebrow, MegaCta } from "@/components/publytics/system";
 import { Breadcrumb, SectionHead, StatusBadge } from "@/components/publytics/atlas";
 import { REFUSAL_CRITERIA } from "@/content/evidence";
-import { CONTENT_AS_OF, pageHead } from "@/content/site";
+import { breadcrumbLd, ldScript, CONTENT_AS_OF, pageHead } from "@/content/site";
 
 const TITLE = "The Refusal Log — Engagements We Declined | Publytics";
 const DESCRIPTION =
@@ -12,7 +12,17 @@ const DESCRIPTION =
 
 export const Route = createFileRoute("/evidence/refusal-log")({
   component: RefusalLogPage,
-  head: () => pageHead({ title: TITLE, description: DESCRIPTION, path: "/evidence/refusal-log" }),
+  head: () => ({
+    ...pageHead({ title: TITLE, description: DESCRIPTION, path: "/evidence/refusal-log" }),
+    scripts: [
+      ldScript(
+        breadcrumbLd([
+          { name: "Evidence", path: "/evidence" },
+          { name: "The refusal log", path: "/evidence/refusal-log" },
+        ]),
+      ),
+    ],
+  }),
 });
 
 /** Published entries. Each is anonymised and dated; the list is append-only. */

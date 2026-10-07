@@ -22,7 +22,14 @@ import { segmentBySlug } from "@/content/segments";
 import { offeringBySlug } from "@/content/offerings";
 import { FIT_LABEL, segmentsForFamily } from "@/content/matrices";
 import { FACTS } from "@/content/dates";
-import { pageHead } from "@/content/site";
+import {
+  ORG_ID,
+  absoluteUrl,
+  breadcrumbLd,
+  ldScript,
+  metaDescription,
+  pageHead,
+} from "@/content/site";
 import type { FamilySlug, OfferingSlug } from "@/content/types";
 
 export const Route = createFileRoute("/products/$slug")({
@@ -31,14 +38,32 @@ export const Route = createFileRoute("/products/$slug")({
     if (!family) throw notFound();
     return family;
   },
-  head: ({ loaderData }) =>
-    loaderData
-      ? pageHead({
-          title: `${loaderData.name} | Publytics Products`,
-          description: loaderData.summary,
-          path: `/products/${loaderData.slug}`,
-        })
-      : {},
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const f = loaderData;
+    const path = `/products/${f.slug}`;
+    return {
+      ...pageHead({ title: `${f.name} | Publytics Products`, description: f.summary, path }),
+      scripts: [
+        ldScript(
+          breadcrumbLd([
+            { name: "Products", path: "/products" },
+            { name: f.name, path },
+          ]),
+        ),
+        ldScript({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: f.name,
+          description: metaDescription(f.summary),
+          url: absoluteUrl(path),
+          provider: { "@id": ORG_ID },
+          areaServed: "IN",
+          serviceType: f.line,
+        }),
+      ],
+    };
+  },
   component: FamilyPage,
 });
 

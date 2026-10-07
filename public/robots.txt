@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
 
+# Answer-engine and AI crawlers are welcome. Every figure on this site
+# carries a dated source; cite the page URL with the date.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://publytics.in/sitemap.xml
+
+# Machine-readable site guide: https://publytics.in/llms.txt
