@@ -1,16 +1,21 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./fonts.css";
 
 /* ══════════════════════════════════════════════════════════════════════
-   PUBLYTICS DESIGN SYSTEM  ·  v3
-   Built to the measured Palantir reference system.
+   PUBLYTICS DESIGN SYSTEM  ·  v4 — the Atlas, published
+   The measured Palantir system (v3) recast in the GTM Atlas's own
+   editorial identity: warm paper, Newsreader serif display with italic
+   champagne emphasis, mono annotations, dot-matrix texture.
 
    Rules that define this system and must not be broken:
    1. Weight 400 is the default at every size. 500 is emphasis.
       Nothing is 600/700 except the wordmark. Bold reads cheap.
-   2. Negative tracking scales with size (−0.045em display → 0 at body).
-      Display line-height is BELOW 1.0.
+      Emphasis in display type is the serif ITALIC, never a weight bump.
+   2. Display type is the serif (Newsreader); tracking is near-neutral
+      because a serif carries its own rhythm. Sans keeps its negative
+      tracking only at label sizes.
    3. Radius is 0. Only large blocks and inset panels take 4px.
    4. Colour is neutral by default. Live-teal means real current data,
       seal-red means a refusal or a correction. Nothing else is coloured.
@@ -18,7 +23,11 @@
    ══════════════════════════════════════════════════════════════════════ */
 
 @theme inline {
-  --radius-sm: 0px; --radius-md: 2px; --radius-lg: 4px; --radius-xl: 4px; --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
+  --radius: 0px;
 
   /* surfaces */
   --color-background: var(--paper);
@@ -47,6 +56,8 @@
 
   /* brand + reserved */
   --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
   --color-live: var(--live);
   --color-live-mark: var(--live-mark);
   --color-live-tint: var(--live-tint);
@@ -55,61 +66,94 @@
   --color-seal-mark: var(--seal-mark);
   --color-seal-tint: var(--seal-tint);
 
-  /* shadcn compatibility aliases */
-  --color-card: var(--surface); --color-card-foreground: var(--ink);
-  --color-popover: var(--surface); --color-popover-foreground: var(--ink);
-  --color-primary: var(--ink); --color-primary-foreground: var(--surface);
-  --color-secondary: var(--mist); --color-secondary-foreground: var(--ink);
-  --color-muted: var(--mist); --color-muted-foreground: var(--steel);
-  --color-accent: var(--mist); --color-accent-foreground: var(--ink);
-  --color-destructive: var(--seal); --color-input: var(--line); --color-ring: var(--ink);
+  /* system key — Delivery / Obligation / Accountability */
+  --color-sys-delivery: var(--sys-delivery);
+  --color-sys-obligation: var(--sys-obligation);
+  --color-sys-accountability: var(--sys-accountability);
 
-  --font-display: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* shadcn compatibility aliases */
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--surface);
+  --color-secondary: var(--mist);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--mist);
+  --color-muted-foreground: var(--steel);
+  --color-accent: var(--mist);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--seal);
+  --color-input: var(--line);
+  --color-ring: var(--ink);
+
+  --font-display: "Newsreader", "Iowan Old Style", "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
 :root {
-  /* ── Neutrals. The near-black carries a faint blue-violet cast so the
-     whole system reads as chosen rather than defaulted to #000. ── */
-  --ink:        #1B1E26;
-  --ink-raised: #23262E;
-  --ink-deep:   #14161C;
-  --surface:    #FFFFFF;
-  --paper:      #FAFAFA;
-  --mist:       #EFEFEF;
-  --tint:       #EEF0F7;
+  /* ── Neutrals. Warm, like the Atlas's paper and cover — the near-black
+     carries ink-and-paper warmth, never a blue screen cast. ── */
+  --ink: #1c1b17;
+  --ink-raised: #26241f;
+  --ink-deep: #131210;
+  --surface: #ffffff;
+  --paper: #faf8f4;
+  --mist: #f1ede4;
+  --tint: #f3efe5;
 
-  --line:         #DBDBDB;
-  --line-strong:  #C6C8CE;
-  --line-inverse: rgba(255,255,255,0.16);
+  --line: #e4dfd3;
+  --line-strong: #cfc8b9;
+  --line-inverse: rgba(255, 255, 255, 0.14);
 
-  --graphite: #4A4D55;
-  --steel:    #74777E;
-  --silver:   #9A9DA4;
+  --graphite: #4f4c44;
+  --steel: #7d786c;
+  --silver: #a8a295;
 
-  --inverse:       #EFEFEF;
-  --inverse-dim:   #A8ABB2;
-  --inverse-faint: #74777E;
+  --inverse: #f2efe8;
+  --inverse-dim: #b3ada0;
+  --inverse-faint: #7d786c;
+
+  /* ── Champagne. The Atlas cover's italic accent — display emphasis
+     on dark grounds and the ghost numerals, nothing else. ── */
+  --accent: #cbb488;
+  --accent-deep: #8a6d3e;
 
   /* ── Brand. Used for primary action only, never as decoration. ── */
-  --brand: #1B2A4E;
+  --brand: #1b2a4e;
 
   /* ── Reserved: live data. Verdigris — oxidised copper on public
      buildings. Appears only where data is real and current. ── */
-  --live:        #0F6B60;
-  --live-mark:   #17857A;
-  --live-bright: #4FC7B4;
-  --live-tint:   #E4F0EE;
+  --live: #0f6b60;
+  --live-mark: #17857a;
+  --live-bright: #4fc7b4;
+  --live-tint: #e4f0ee;
 
   /* ── Reserved: refusals and corrections. Nothing else, ever. ── */
-  --seal:      #8E2A1F;
-  --seal-mark: #A8382A;
-  --seal-tint: #F7E8E4;
+  --seal: #8e2a1f;
+  --seal-mark: #a8382a;
+  --seal-tint: #f7e8e4;
+
+  /* ── System key (GTM Atlas): one hue per system the buyer purchases.
+     Used ONLY on system tags, matrix headers and diagram strokes —
+     never for live data (verdigris) or refusals (seal), never on buttons.
+     Petrol, ochre and indigo are chosen to stay distinct from both. ── */
+  --sys-delivery: #22668a;
+  --sys-obligation: #a8601f;
+  --sys-accountability: #4b48a6;
+  --sys-delivery-dark: #6fb3d6;
+  --sys-obligation-dark: #e0a15e;
+  --sys-accountability-dark: #a3a1ee;
 }
 
 @layer base {
-  *, *::before, *::after { border-color: var(--line); }
+  *,
+  *::before,
+  *::after {
+    border-color: var(--line);
+  }
 
   html {
     scroll-behavior: smooth;
@@ -127,19 +171,29 @@
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1;
   }
 
   /* Headings inherit the display face but carry NO default weight bump.
      Size and tracking do the work, never boldness. */
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: var(--font-display);
     font-weight: 400;
     color: var(--ink);
     text-wrap: balance;
   }
 
-  strong, b { font-weight: 500; }
+  strong,
+  b {
+    font-weight: 500;
+  }
 
   [lang="ta"] {
     font-family: "Noto Sans Tamil", var(--font-sans);
@@ -148,9 +202,15 @@
     word-break: keep-all;
   }
 
-  a { color: inherit; text-decoration: none; }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-  ::selection { background: var(--ink); color: var(--paper); }
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
 
   :where(a, button, summary, input, select, textarea):focus-visible {
     outline: 2px solid var(--ink);
@@ -164,47 +224,64 @@
 
 @utility t-display-xl {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 6.2vw, 5rem);      /* 44 → 80 */
-  line-height: 0.96;
-  letter-spacing: -0.043em;
+  font-size: clamp(2.875rem, 6.4vw, 5.25rem); /* 46 → 84 */
+  line-height: 1.02;
+  letter-spacing: -0.015em;
   font-weight: 400;
 }
 @utility t-display {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 4.4vw, 3.5rem);    /* 36 → 56 */
-  line-height: 1.0;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.25rem, 4.4vw, 3.625rem); /* 36 → 58 */
+  line-height: 1.06;
+  letter-spacing: -0.012em;
   font-weight: 400;
 }
 @utility t-h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 2.9vw, 2.125rem);  /* 28 → 34 */
-  line-height: 1.06;
-  letter-spacing: -0.038em;
+  font-size: clamp(1.8125rem, 3vw, 2.25rem); /* 29 → 36 */
+  line-height: 1.14;
+  letter-spacing: -0.01em;
   font-weight: 400;
 }
 @utility t-h3 {
   font-family: var(--font-display);
-  font-size: clamp(1.375rem, 1.9vw, 1.5rem);   /* 22 → 24 */
-  line-height: 1.18;
-  letter-spacing: -0.025em;
+  font-size: clamp(1.4375rem, 2vw, 1.5625rem); /* 23 → 25 */
+  line-height: 1.25;
+  letter-spacing: -0.005em;
   font-weight: 400;
 }
+/* H4 and below stay sans — the serif is reserved for display sizes,
+   exactly as the Atlas reserves it for its headlines. */
 @utility t-h4 {
+  font-family: var(--font-sans);
+  font-size: 1.1875rem;
+  line-height: 1.3;
+  letter-spacing: -0.012em;
+  font-weight: 400;
+}
+/* The serif italic — display emphasis and pull-quotes. */
+@utility t-serif-i {
   font-family: var(--font-display);
-  font-size: 1.25rem;
-  line-height: 1.25;
-  letter-spacing: -0.018em;
+  font-style: italic;
   font-weight: 400;
 }
 @utility t-lead {
-  font-size: clamp(1.125rem, 1.5vw, 1.25rem);  /* 18 → 20 */
+  font-size: clamp(1.125rem, 1.5vw, 1.25rem); /* 18 → 20 */
   line-height: 1.45;
   letter-spacing: -0.005em;
 }
-@utility t-body   { font-size: 1.125rem; line-height: 1.45; }   /* 18/26 */
-@utility t-small  { font-size: 1rem;     line-height: 1.45; }   /* 16/23 */
-@utility t-micro  { font-size: 0.8125rem; line-height: 1.5; }   /* 13 */
+@utility t-body {
+  font-size: 1.125rem;
+  line-height: 1.45;
+} /* 18/26 */
+@utility t-small {
+  font-size: 1rem;
+  line-height: 1.45;
+} /* 16/23 */
+@utility t-micro {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+} /* 13 */
 
 /* The micro-caps label. 10px mono, +0.05em, uppercase. Used for
    eyebrows, index markers, provenance, and every technical annotation. */
@@ -236,79 +313,143 @@
 
 @utility shell {
   width: 100%;
-  max-width: 84.5rem;              /* 1352px — the measured container */
+  max-width: 84.5rem; /* 1352px — the measured container */
   margin-inline: auto;
   padding-inline: 1.25rem;
-  @media (min-width: 48rem)  { padding-inline: 2.5rem; }
-  @media (min-width: 90rem)  { padding-inline: 2.5rem; }
+  @media (min-width: 48rem) {
+    padding-inline: 2.5rem;
+  }
+  @media (min-width: 90rem) {
+    padding-inline: 2.5rem;
+  }
 }
 @utility shell-narrow {
   width: 100%;
   max-width: 52rem;
   margin-inline: auto;
   padding-inline: 1.25rem;
-  @media (min-width: 48rem) { padding-inline: 2.5rem; }
+  @media (min-width: 48rem) {
+    padding-inline: 2.5rem;
+  }
 }
 @utility band {
   padding-block: 4.5rem;
-  @media (min-width: 48rem) { padding-block: 6rem; }
-  @media (min-width: 64rem) { padding-block: 7.5rem; }
+  @media (min-width: 48rem) {
+    padding-block: 6rem;
+  }
+  @media (min-width: 64rem) {
+    padding-block: 7.5rem;
+  }
 }
 @utility band-tight {
   padding-block: 3rem;
-  @media (min-width: 64rem) { padding-block: 4rem; }
+  @media (min-width: 64rem) {
+    padding-block: 4rem;
+  }
 }
-@utility rule    { border-top: 1px solid var(--line); }
-@utility rule-inverse { border-top: 1px solid var(--line-inverse); }
+@utility rule {
+  border-top: 1px solid var(--line);
+}
+@utility rule-inverse {
+  border-top: 1px solid var(--line-inverse);
+}
 
 /* ══════════════════════ ACTIONS ══════════════════════
    Measured: 40px tall, 16px/400, radius 0, 1px border.   */
 
 @utility btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  min-height: 2.75rem; padding: 0.625rem 1.375rem;
-  font-size: 0.9375rem; font-weight: 400; line-height: 1.2;
-  border: 1px solid transparent; border-radius: 0;
-  transition: background-color .18s ease, color .18s ease, border-color .18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.625rem 1.375rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  border-radius: 0;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.12s ease;
   white-space: nowrap;
+  &:active {
+    transform: translateY(1px);
+  }
+  /* On phones a long label wraps rather than forcing its column wider than the screen. */
+  @media (max-width: 40rem) {
+    white-space: normal;
+    text-align: left;
+  }
 }
 @utility btn-solid {
-  background: var(--ink); color: var(--paper); border-color: var(--ink);
-  &:hover { background: var(--brand); border-color: var(--brand); }
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  &:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+  }
 }
 @utility btn-outline {
-  background: transparent; color: var(--ink); border-color: var(--ink);
-  &:hover { background: var(--ink); color: var(--paper); }
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+  &:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
 }
 @utility btn-on-dark {
-  background: var(--paper); color: var(--ink); border-color: var(--paper);
-  &:hover { background: transparent; color: var(--paper); }
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+  &:hover {
+    background: transparent;
+    color: var(--paper);
+  }
 }
 @utility btn-ghost-on-dark {
-  background: transparent; color: var(--inverse); border-color: var(--line-inverse);
-  &:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.34); }
+  background: transparent;
+  color: var(--inverse);
+  border-color: var(--line-inverse);
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.34);
+  }
 }
 
 /* The underlined arrow link — the reference's standard tertiary action */
 @utility link-arrow {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-size: 0.9375rem; line-height: 1.4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.4;
   border-bottom: 1px solid currentColor;
   padding-bottom: 0.2rem;
-  transition: gap .2s ease, opacity .2s ease;
-  &:hover { gap: 0.875rem; }
+  transition:
+    gap 0.2s ease,
+    opacity 0.2s ease;
+  &:hover {
+    gap: 0.875rem;
+  }
 }
 
 /* ══════════════════════ SIGNATURE DEVICES ══════════════════════ */
 
 /* /0.1 — the numbered capability row */
 @utility index-row {
-  display: grid; gap: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
   padding-block: 2.5rem;
   border-top: 1px solid var(--line);
   @media (min-width: 64rem) {
     grid-template-columns: 15rem 1fr;
-    gap: 4rem; padding-block: 3.25rem;
+    gap: 4rem;
+    padding-block: 3.25rem;
   }
 }
 
@@ -319,11 +460,19 @@
 
 /* The twin mega CTA block */
 @utility mega-cta {
-  display: flex; flex-direction: column; justify-content: space-between;
-  min-height: 15rem; padding: 1.75rem 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 15rem;
+  padding: 1.75rem 1.5rem 1.75rem;
   border-radius: 4px;
-  transition: transform .25s ease, background-color .25s ease;
-  @media (min-width: 64rem) { min-height: 17.5rem; padding: 2rem; }
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease;
+  @media (min-width: 64rem) {
+    min-height: 17.5rem;
+    padding: 2rem;
+  }
 }
 
 /* Inset tint hero panel — interior page headers */
@@ -334,55 +483,155 @@
   overflow: hidden;
 }
 
-/* The isometric diamond mesh used behind tint panels */
+/* The dot matrix — the Atlas's record-mark texture, not a grid of lines */
 @utility mesh {
-  background-image:
-    linear-gradient(45deg, rgba(27,42,78,.05) 1px, transparent 1px),
-    linear-gradient(-45deg, rgba(27,42,78,.05) 1px, transparent 1px);
-  background-size: 34px 34px;
+  background-image: radial-gradient(rgba(28, 27, 23, 0.085) 1px, transparent 1.5px);
+  background-size: 21px 21px;
 }
 @utility mesh-inverse {
-  background-image:
-    linear-gradient(45deg, rgba(255,255,255,.045) 1px, transparent 1px),
-    linear-gradient(-45deg, rgba(255,255,255,.045) 1px, transparent 1px);
-  background-size: 34px 34px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1.5px);
+  background-size: 21px 21px;
+}
+
+/* Dark-section atmosphere: the cover treatment. Soft system-colour
+   glows at the edges and a film grain, over warm near-black. */
+@utility atmo {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(56rem 32rem at 10% -8%, rgba(79, 199, 180, 0.065), transparent 62%),
+    radial-gradient(46rem 30rem at 94% 2%, rgba(96, 92, 184, 0.075), transparent 62%),
+    radial-gradient(50rem 30rem at 50% 118%, rgba(203, 180, 136, 0.055), transparent 64%),
+    var(--ink);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.46'/%3E%3C/svg%3E");
+    opacity: 0.26;
+    mix-blend-mode: overlay;
+  }
+}
+
+/* Ghost numeral — the oversized serif index behind a page title. */
+@utility ghost-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(6.5rem, 15vw, 12rem);
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  user-select: none;
+  pointer-events: none;
+}
+@utility ghost-num-dark {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+}
+
+/* Card lift — hover elevation for linked panels. */
+@utility card-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.2s ease;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 26px 48px -30px rgba(28, 27, 23, 0.3),
+      0 4px 12px -6px rgba(28, 27, 23, 0.08);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-lift:hover {
+    transform: none;
+  }
+}
+
+/* Animated underline for quiet navigation links. */
+@utility u-anim {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 calc(100% - 0.05em);
+  transition: background-size 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+  &:hover {
+    background-size: 100% 1px;
+  }
 }
 
 /* Pill tab switcher — Record · Verify · Publish · Challenge · Correct */
 @utility pill {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 0.5rem 1.125rem; border-radius: 999px;
-  font-size: 0.875rem; line-height: 1.2; font-weight: 400;
-  border: 1px solid var(--line-strong); color: var(--graphite);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.125rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  font-weight: 400;
+  border: 1px solid var(--line-strong);
+  color: var(--graphite);
   background: transparent;
-  transition: all .18s ease;
-  &:hover { border-color: var(--ink); color: var(--ink); }
+  transition: all 0.18s ease;
+  &:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
 }
 @utility pill-active {
-  background: var(--ink); border-color: var(--ink); color: var(--paper);
-  &:hover { color: var(--paper); }
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  &:hover {
+    color: var(--paper);
+  }
 }
 @utility pill-on-dark {
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 0.5rem 1.125rem; border-radius: 999px;
-  font-size: 0.875rem; line-height: 1.2; font-weight: 400;
-  border: 1px solid var(--line-inverse); color: var(--inverse-dim);
-  background: transparent; transition: all .18s ease;
-  &:hover { border-color: rgba(255,255,255,.4); color: var(--inverse); }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.125rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  font-weight: 400;
+  border: 1px solid var(--line-inverse);
+  color: var(--inverse-dim);
+  background: transparent;
+  transition: all 0.18s ease;
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: var(--inverse);
+  }
 }
 @utility pill-on-dark-active {
-  background: var(--paper); border-color: var(--paper); color: var(--ink);
-  &:hover { color: var(--ink); }
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+  &:hover {
+    color: var(--ink);
+  }
 }
 
 /* The provenance chip — a figure without one does not render */
 @utility chip {
-  display: inline-flex; align-items: center; gap: 0.3rem;
-  font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
   border-bottom: 1px dotted currentColor;
-  cursor: pointer; vertical-align: baseline;
-  transition: opacity .15s ease;
-  &:hover { opacity: .7; }
+  cursor: pointer;
+  vertical-align: baseline;
+  transition: opacity 0.15s ease;
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 /* The boundary panel — seal reservation */
@@ -390,14 +639,20 @@
   border-left: 2px solid var(--seal);
   background: var(--seal-tint);
   padding: 2rem 1.5rem;
-  @media (min-width: 64rem) { padding: 3rem 3.5rem; }
+  @media (min-width: 64rem) {
+    padding: 3rem 3.5rem;
+  }
 }
 
 /* Series issue card — two-panel colour card with micro rails */
 @utility issue-card {
-  display: grid; border-radius: 2px; overflow: hidden;
+  display: grid;
+  border-radius: 2px;
+  overflow: hidden;
   min-height: 15rem;
-  @media (min-width: 40rem) { grid-template-columns: 1fr 1.15fr; }
+  @media (min-width: 40rem) {
+    grid-template-columns: 1fr 1.15fr;
+  }
 }
 
 /* Numeric display for figures — always tabular */
@@ -406,11 +661,89 @@
   letter-spacing: -0.03em;
 }
 
+/* Fit marks — the Atlas matrix notation. Filled = primary/high,
+   half = secondary/medium, ring = optional/low, dash = not offered. */
+@utility fit-dot {
+  display: inline-block;
+  width: 0.8125rem;
+  height: 0.8125rem;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  flex-shrink: 0;
+}
+@utility fit-full {
+  background: currentColor;
+}
+@utility fit-half {
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+@utility fit-none {
+  border: 0;
+  width: 0.75rem;
+  height: 1.5px;
+  border-radius: 0;
+  background: var(--line-strong);
+}
+
+/* Tag carrying a system key colour via --sys */
+@utility sys-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  line-height: 1.6;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--sys, var(--steel));
+  &::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--sys, var(--steel));
+  }
+}
+
+/* Subtle entrance. Content is visible without JS; the class is only
+   added by script, so no-JS and reduced-motion readers see everything. */
+.reveal-armed {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-armed.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Details/summary FAQ */
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
+  .reveal-armed {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

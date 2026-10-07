@@ -17,10 +17,11 @@ const SITEMAP: [string, string][] = [
   ["Solutions", "/solutions"],
   ["Products", "/products"],
   ["Services & Programmes", "/services"],
+  ["How to engage", "/engage"],
+  ["DPDP 2027", "/dpdp"],
   ["Evidence", "/evidence"],
   ["Trust", "/trust"],
   ["Company", "/company"],
-  ["Contact", "/company"],
 ];
 
 function NotFoundComponent() {
@@ -28,24 +29,33 @@ function NotFoundComponent() {
     <div className="flex min-h-screen flex-col bg-paper">
       <div className="shell flex flex-1 flex-col justify-center py-24">
         <p className="t-label text-steel">Error 404</p>
-        <h1 className="t-display-xl mt-6 max-w-3xl">
-          This page has moved, or never existed.
-        </h1>
+        <h1 className="t-display-xl mt-6 max-w-3xl">This page has moved, or never existed.</h1>
         <p className="t-lead mt-7 max-w-lg text-graphite">
           Here is the sitemap, and here is how to reach a person.
         </p>
 
-        <nav aria-label="Sitemap" className="mt-14 grid max-w-4xl gap-px bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <nav
+          aria-label="Sitemap"
+          className="mt-14 grid max-w-4xl gap-px bg-line sm:grid-cols-2 lg:grid-cols-4"
+        >
           {SITEMAP.map(([label, href]) => (
-            <Link key={label} to={href} className="bg-paper px-5 py-5 text-[0.9375rem] text-graphite transition-colors hover:text-ink">
+            <Link
+              key={label}
+              to={href}
+              className="bg-paper px-5 py-5 text-[0.9375rem] text-graphite transition-colors hover:text-ink"
+            >
               {label}
             </Link>
           ))}
         </nav>
 
         <div className="mt-12 flex flex-wrap gap-3">
-          <Link to="/" className="btn btn-solid">Return to the homepage</Link>
-          <Link to="/company" hash="contact" className="btn btn-outline">Reach a person</Link>
+          <Link to="/" className="btn btn-solid">
+            Return to the homepage
+          </Link>
+          <Link to="/company" hash="contact" className="btn btn-outline">
+            Reach a person
+          </Link>
         </div>
       </div>
     </div>
@@ -77,7 +87,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             Try again
           </button>
-          <a href="/" className="btn btn-outline">Return to the homepage</a>
+          <a href="/" className="btn btn-outline">
+            Return to the homepage
+          </a>
         </div>
       </div>
     </div>
@@ -99,17 +111,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:site_name", content: "Publytics" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#1B1E26" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      // Fonts are self-hosted (src/fonts.css): no third-party requests.
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Tamil:wght@400;500&display=swap",
+        rel: "preload",
+        href: "/fonts/inter-latin-567244.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: "/fonts/newsreader-latin-roman.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        href: "/fonts/newsreader-latin-italic.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
@@ -123,7 +152,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <head>
         <HeadContent />
       </head>

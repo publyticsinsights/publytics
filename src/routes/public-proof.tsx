@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/publytics/chrome";
+import { PageFrame } from "@/components/publytics/chrome";
 import {
   Eyebrow,
   IssueCard,
@@ -11,28 +11,22 @@ import {
   Statement,
 } from "@/components/publytics/system";
 
+import { pageHead } from "@/content/site";
+
 const TITLE = "Public Proof — The Argument | Publytics";
 const DESCRIPTION =
   "When a citizen asks whether the promise was kept, who answers — and what do they have to show? The structural argument behind Publytics.";
 
 export const Route = createFileRoute("/public-proof")({
   component: PublicProofPage,
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-    ],
-    links: [{ rel: "canonical", href: "/public-proof" }],
-  }),
+  head: () => pageHead({ title: TITLE, description: DESCRIPTION, path: "/public-proof" }),
 });
 
 const SUBNAV = [
-  { label: "The argument", href: "/public-proof" },
-  { label: "The operating loop", href: "/public-proof" },
-  { label: "The Platform", href: "/products" },
-  { label: "The series", href: "/evidence" },
+  { label: "The argument", href: "#argument" },
+  { label: "The gap", href: "#gap" },
+  { label: "The operating loop", href: "#loop" },
+  { label: "Three commitments", href: "#commitments" },
 ];
 
 const COMMITMENTS = [
@@ -43,13 +37,9 @@ const COMMITMENTS = [
 
 function PublicProofPage() {
   return (
-    <div className="min-h-screen bg-paper">
-      <AnnouncementBar />
-      <SiteHeader section="Public Proof" subnav={SUBNAV} />
-
-      <main>
+    <PageFrame section="Public Proof" subnav={SUBNAV}>
         {/* Page header — asymmetric, title left, brief right */}
-        <header className="shell pt-12 pb-16 lg:pt-20 lg:pb-24">
+        <header id="argument" className="shell scroll-mt-32 pt-12 pb-16 lg:pt-20 lg:pb-24">
           <Eyebrow tone="steel">The argument</Eyebrow>
           <div className="mt-8 grid gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-end lg:gap-16">
             <h1 className="t-display-xl">
@@ -74,7 +64,7 @@ function PublicProofPage() {
         </section>
 
         {/* The evidence the gap is real */}
-        <section className="rule bg-paper">
+        <section id="gap" className="rule scroll-mt-32 bg-paper">
           <div className="shell band">
             <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
               <div>
@@ -106,9 +96,11 @@ function PublicProofPage() {
                   ))}
                 </dl>
 
-                <p className="t-micro mt-6 text-steel">
-                  Figures are illustrative of the pattern this argument describes, pending publication of the sourced
-                  dataset. Every figure on this site carries its provenance; these carry theirs.
+                <p className="mt-6 border-l-2 border-line-strong bg-surface px-5 py-4 text-[0.875rem] leading-relaxed text-graphite">
+                  <span className="t-label block text-steel">Illustrative — pending the sourced dataset</span>
+                  These figures illustrate the pattern this argument describes. They are not yet sourced to the standard this site
+                  holds itself to, and should not be cited until the sourced dataset is published with its method. Every figure
+                  on this site carries its provenance; these carry theirs.
                 </p>
               </div>
             </div>
@@ -139,7 +131,7 @@ function PublicProofPage() {
         </section>
 
         {/* The operating loop */}
-        <section className="relative overflow-hidden bg-ink text-inverse">
+        <section id="loop" className="relative scroll-mt-32 overflow-hidden atmo text-inverse">
           <div aria-hidden="true" className="mesh-inverse absolute inset-0" />
           <div className="shell band relative">
             <Eyebrow tone="inverse">The operating loop</Eyebrow>
@@ -157,7 +149,7 @@ function PublicProofPage() {
         </section>
 
         {/* The three commitments */}
-        <section className="rule bg-paper">
+        <section id="commitments" className="rule scroll-mt-32 bg-paper">
           <div className="shell band">
             <Eyebrow tone="steel">The three commitments</Eyebrow>
             <div className="mt-10">
@@ -213,9 +205,6 @@ function PublicProofPage() {
         <section className="rule bg-paper">
           <div className="shell band"><MegaCta /></div>
         </section>
-      </main>
-
-      <SiteFooter />
-    </div>
+      </PageFrame>
   );
 }

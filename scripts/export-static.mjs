@@ -8,29 +8,41 @@
 // assets. Delete this workaround once the upstream prerender crawler is
 // fixed and switch to `nitro: { preset: "github-pages" }`.
 //
-// Routes are derived from src/routes so a new page is prerendered
-// automatically — no need to maintain a list here.
+// Routes are DISCOVERED by crawling the rendered site from "/" and following
+// every internal link, so dynamic pages (/solutions/$slug, /products/$slug …)
+// are prerendered without maintaining a list. Every top-level route file is
+// also seeded, so a page that nothing links to yet is still exported — and a
+// route file that renders no page fails the build.
 import { spawn, spawnSync } from "node:child_process";
 import { mkdir, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+const SITE_URL = "https://publytics.in";
 const outDir = path.join(process.cwd(), ".output", "public");
 const routesDir = path.join(process.cwd(), "src", "routes");
 const port = 4174 + Math.floor(Math.random() * 1000);
 
-/** Derive the route table from the file-based routes directory. */
-async function discoverRoutes() {
+/** Static (param-free) routes declared as files, e.g. "engage.tsx" -> "/engage". */
+async function seedRoutes() {
   const entries = await readdir(routesDir, { withFileTypes: true });
-  const routes = [];
-  for (const entry of entries) {
-    if (!entry.isFile()) continue;
-    const { name } = entry;
-    if (!name.endsWith(".tsx")) continue;
-    if (name.startsWith("__")) continue; // __root.tsx
-    const base = name.slice(0, -4);
-    routes.push(base === "index" ? "/" : `/${base}`);
+  const routes = new Set(["/"]);
+  for (const { name } of entries) {
+    if (!name.endsWith(".tsx") || name.startsWith("__") || name.includes("$")) continue;
+    const base = name.slice(0, -4).replace(/\.index$/, "").replace(/^index$/, "");
+    routes.add("/" + base.split(".").join("/"));
   }
-  return routes.sort((a, b) => a.localeCompare(b));
+  return [...routes].map((r) => (r === "/" ? r : r.replace(/\/$/, "")));
+}
+
+/** Internal page links in a rendered HTML document. */
+function linksIn(html) {
+  const out = new Set();
+  for (const m of html.matchAll(/href="(\/[^"#?]*)/g)) {
+    const p = m[1].replace(/\/$/, "") || "/";
+    if (/\.[a-z0-9]+$/i.test(p)) continue; // assets, sitemap.xml, favicon…
+    out.add(p);
+  }
+  return out;
 }
 
 console.log("[export-static] Building node-server SSR bundle...");
@@ -43,8 +55,6 @@ if (build.status !== 0) {
   process.exit(build.status ?? 1);
 }
 
-const routes = await discoverRoutes();
-console.log(`[export-static] Prerendering ${routes.length} routes: ${routes.join(", ")}`);
 
 console.log("[export-static] Booting server to capture rendered HTML...");
 const server = spawn(process.execPath, [path.join(".output", "server", "index.mjs")], {
@@ -79,15 +89,40 @@ async function writeRoute(route, html) {
 try {
   await waitForServer();
 
-  for (const route of routes) {
+  const queue = await seedRoutes();
+  const seen = new Set(queue);
+  const written = [];
+  while (queue.length) {
+    const route = queue.shift();
     const res = await fetch(`http://localhost:${port}${route}`);
     if (!res.ok) {
       throw new Error(`SSR capture of "${route}" returned HTTP ${res.status}`);
     }
     const html = await res.text();
-    const written = await writeRoute(route, html);
-    console.log(`[export-static]   ${route} -> ${written}`);
+    const file = await writeRoute(route, html);
+    written.push(route);
+    console.log(`[export-static]   ${route} -> ${file}`);
+    for (const link of linksIn(html)) {
+      if (!seen.has(link)) {
+        seen.add(link);
+        queue.push(link);
+      }
+    }
   }
+
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [...written]
+    .sort()
+    .map((r) => `  <url><loc>${SITE_URL}${r}</loc><lastmod>${today}</lastmod></url>`);
+  const sitemap = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...urls,
+    "</urlset>",
+    "",
+  ].join("\n");
+  await writeFile(path.join(outDir, "sitemap.xml"), sitemap, "utf8");
+  console.log(`[export-static]   sitemap.xml (${written.length} URLs)`);
 
   // Real 404 page: render a path that matches no route so the router's
   // notFoundComponent is what gets captured, not the homepage.
@@ -96,7 +131,7 @@ try {
   await writeFile(path.join(outDir, "404.html"), notFoundHtml, "utf8");
   console.log("[export-static]   404.html");
 
-  console.log(`[export-static] Wrote ${routes.length} routes + 404.html to ${outDir}`);
+  console.log(`[export-static] Wrote ${written.length} routes + 404.html + sitemap.xml to ${outDir}`);
 } finally {
   server.kill();
 }

@@ -6,7 +6,13 @@ import { ArrowRight, ArrowUpRight, Minus } from "lucide-react";
    SECTION PRIMITIVES
    ══════════════════════════════════════════════════════════ */
 
-export function Eyebrow({ children, tone = "ink" }: { children: ReactNode; tone?: "ink" | "steel" | "live" | "seal" | "inverse" }) {
+export function Eyebrow({
+  children,
+  tone = "ink",
+}: {
+  children: ReactNode;
+  tone?: "ink" | "steel" | "live" | "seal" | "inverse";
+}) {
   const colour = {
     ink: "text-ink",
     steel: "text-steel",
@@ -36,7 +42,11 @@ export function PageHeader({
 }) {
   return (
     <header className="shell pt-10 pb-14 lg:pt-16 lg:pb-20">
-      {eyebrow && <div className="mb-8"><Eyebrow tone="steel">{eyebrow}</Eyebrow></div>}
+      {eyebrow && (
+        <div className="mb-8">
+          <Eyebrow tone="steel">{eyebrow}</Eyebrow>
+        </div>
+      )}
       <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:items-end lg:gap-16">
         <h1 className="t-display-xl">{title}</h1>
         {brief && <p className="t-lead max-w-md text-graphite lg:pb-2">{brief}</p>}
@@ -57,15 +67,17 @@ export function Statement({
   align?: "left" | "center";
 }) {
   return (
-    <p className={`t-display max-w-5xl text-steel ${align === "center" ? "mx-auto text-center" : ""} ${className}`}>
+    <p
+      className={`t-display max-w-5xl text-graphite/80 ${align === "center" ? "mx-auto text-center" : ""} ${className}`}
+    >
       {children}
     </p>
   );
 }
 
-/** The emphasised phrase inside a Statement. */
+/** The emphasised phrase inside a Statement — the Atlas cover's serif italic. */
 export function Say({ children }: { children: ReactNode }) {
-  return <span className="text-ink">{children}</span>;
+  return <em className="t-serif-i text-ink">{children}</em>;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -84,7 +96,15 @@ interface ChipProps {
   limitations?: string;
 }
 
-export function ProvenanceChip({ source, method, date, live = false, version, coverage, limitations }: ChipProps) {
+export function ProvenanceChip({
+  source,
+  method,
+  date,
+  live = false,
+  version,
+  coverage,
+  limitations,
+}: ChipProps) {
   const [open, setOpen] = useState(false);
   const id = useId();
   return (
@@ -108,11 +128,31 @@ export function ProvenanceChip({ source, method, date, live = false, version, co
         >
           <span className="t-label block text-steel">Provenance record</span>
           <span className="mt-3 block space-y-1.5 font-mono text-[0.6875rem] leading-relaxed text-graphite">
-            <span className="block"><span className="text-steel">source </span>{source}</span>
-            <span className="block"><span className="text-steel">method </span>{method}</span>
-            <span className="block"><span className="text-steel">effective </span>{date}{version ? ` · v${version}` : ""}</span>
-            {coverage && <span className="block"><span className="text-steel">coverage </span>{coverage}</span>}
-            {limitations && <span className="block"><span className="text-steel">limits </span>{limitations}</span>}
+            <span className="block">
+              <span className="text-steel">source </span>
+              {source}
+            </span>
+            <span className="block">
+              <span className="text-steel">method </span>
+              {method}
+            </span>
+            <span className="block">
+              <span className="text-steel">effective </span>
+              {date}
+              {version ? ` · v${version}` : ""}
+            </span>
+            {coverage && (
+              <span className="block">
+                <span className="text-steel">coverage </span>
+                {coverage}
+              </span>
+            )}
+            {limitations && (
+              <span className="block">
+                <span className="text-steel">limits </span>
+                {limitations}
+              </span>
+            )}
           </span>
         </span>
       )}
@@ -246,7 +286,9 @@ export function OperatingLoop({ tone = "light" }: { tone?: "light" | "dark" }) {
       <div className={`mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16 ${dark ? "" : ""}`}>
         <div>
           <h3 className={`t-h3 ${dark ? "text-inverse" : ""}`}>{item.line}</h3>
-          <p className={`t-small mt-4 max-w-md ${dark ? "text-inverse-dim" : "text-graphite"}`}>{item.body}</p>
+          <p className={`t-small mt-4 max-w-md ${dark ? "text-inverse-dim" : "text-graphite"}`}>
+            {item.body}
+          </p>
         </div>
         <ul className={dark ? "" : ""}>
           {item.points.map((p) => (
@@ -256,7 +298,10 @@ export function OperatingLoop({ tone = "light" }: { tone?: "light" | "dark" }) {
                 dark ? "rule-inverse text-inverse-dim" : "rule text-graphite"
               } last:border-b-0`}
             >
-              <Minus className={`mt-1.5 h-3 w-3 shrink-0 ${dark ? "text-live-bright" : "text-live"}`} strokeWidth={2} />
+              <Minus
+                className={`mt-1.5 h-3 w-3 shrink-0 ${dark ? "text-live-bright" : "text-live"}`}
+                strokeWidth={2}
+              />
               {p}
             </li>
           ))}
@@ -297,7 +342,11 @@ export function DisclosureTriptych({
         >
           <span className={`t-index ${dark ? "text-live-bright" : "text-live"}`}>{r.n}</span>
           <h3 className={`text-[0.9375rem] ${dark ? "text-inverse" : "text-ink"}`}>{r.label}</h3>
-          <p className={`text-[0.9375rem] leading-relaxed ${dark ? "text-inverse-dim" : "text-graphite"}`}>{r.text}</p>
+          <p
+            className={`text-[0.9375rem] leading-relaxed ${dark ? "text-inverse-dim" : "text-graphite"}`}
+          >
+            {r.text}
+          </p>
         </div>
       ))}
     </div>
@@ -308,7 +357,13 @@ export function DisclosureTriptych({
    THE BOUNDARY PANEL — seal reservation
    ══════════════════════════════════════════════════════════ */
 
-export function BoundaryPanel({ children, eyebrow = "Our boundary" }: { children: ReactNode; eyebrow?: string }) {
+export function BoundaryPanel({
+  children,
+  eyebrow = "Our boundary",
+}: {
+  children: ReactNode;
+  eyebrow?: string;
+}) {
   return (
     <div className="boundary">
       <Eyebrow tone="seal">{eyebrow}</Eyebrow>
@@ -338,7 +393,13 @@ const CHECKLIST = [
   "Download format and reuse terms specified",
 ];
 
-export function IntegrityChecklist({ version = "1.0", date = "4 Sep 2026" }: { version?: string; date?: string }) {
+export function IntegrityChecklist({
+  version = "1.0",
+  date = "4 Sep 2026",
+}: {
+  version?: string;
+  date?: string;
+}) {
   return (
     <div className="border border-line bg-surface">
       <div className="flex items-center justify-between gap-4 border-b border-line px-6 py-5">
@@ -352,7 +413,10 @@ export function IntegrityChecklist({ version = "1.0", date = "4 Sep 2026" }: { v
       </div>
       <ol>
         {CHECKLIST.map((item, i) => (
-          <li key={item} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-2 border-b border-line px-6 py-4 last:border-b-0">
+          <li
+            key={item}
+            className="grid grid-cols-[2.5rem_1fr] items-baseline gap-2 border-b border-line px-6 py-4 last:border-b-0"
+          >
             <span className="t-index text-silver">{String(i + 1).padStart(2, "0")}</span>
             <span className="text-[0.9375rem] leading-snug text-graphite">{item}</span>
           </li>
@@ -373,9 +437,9 @@ export function IntegrityChecklist({ version = "1.0", date = "4 Sep 2026" }: { v
 
 const ISSUE_THEMES: Record<string, { bg: string; art: string; fg: string }> = {
   indigo: { bg: "#1B2A4E", art: "#22335C", fg: "#F2F3F7" },
-  teal:   { bg: "#0F6B60", art: "#147A6D", fg: "#EAF5F2" },
-  seal:   { bg: "#8E2A1F", art: "#A03327", fg: "#FBEDEA" },
-  slate:  { bg: "#3C4048", art: "#474C55", fg: "#F0F1F3" },
+  teal: { bg: "#0F6B60", art: "#147A6D", fg: "#EAF5F2" },
+  seal: { bg: "#8E2A1F", art: "#A03327", fg: "#FBEDEA" },
+  slate: { bg: "#3C4048", art: "#474C55", fg: "#F0F1F3" },
 };
 
 export function IssueCard({
@@ -397,20 +461,36 @@ export function IssueCard({
   return (
     <article className="issue-card" style={{ background: t.bg, color: t.fg }}>
       <div className="flex flex-col justify-between p-5 lg:p-6">
-        <div className="flex items-center gap-3 border-b pb-3" style={{ borderColor: "rgba(255,255,255,.22)" }}>
-          <span className="t-label" style={{ opacity: 0.85 }}>{series}</span>
-          <span className="t-label ml-auto" style={{ opacity: 0.85 }}>№ {issue}</span>
+        <div
+          className="flex items-center gap-3 border-b pb-3"
+          style={{ borderColor: "rgba(255,255,255,.22)" }}
+        >
+          <span className="t-label" style={{ opacity: 0.85 }}>
+            {series}
+          </span>
+          <span className="t-label ml-auto" style={{ opacity: 0.85 }}>
+            № {issue}
+          </span>
         </div>
         <div className="py-8">
           <h3 className="t-h3 flex items-start gap-2" style={{ color: t.fg }}>
             {title}
             <ArrowUpRight className="mt-1 h-5 w-5 shrink-0" strokeWidth={1.5} />
           </h3>
-          <p className="t-micro mt-3 max-w-xs" style={{ opacity: 0.78 }}>— {subtitle}</p>
+          <p className="t-micro mt-3 max-w-xs" style={{ opacity: 0.78 }}>
+            — {subtitle}
+          </p>
         </div>
-        <div className="flex items-center gap-4 border-t pt-3" style={{ borderColor: "rgba(255,255,255,.22)" }}>
-          <span className="t-label" style={{ opacity: 0.7 }}>Publytics</span>
-          <span className="t-label ml-auto" style={{ opacity: 0.7 }}>{status ?? "publytics.in"}</span>
+        <div
+          className="flex items-center gap-4 border-t pt-3"
+          style={{ borderColor: "rgba(255,255,255,.22)" }}
+        >
+          <span className="t-label" style={{ opacity: 0.7 }}>
+            Publytics
+          </span>
+          <span className="t-label ml-auto" style={{ opacity: 0.7 }}>
+            {status ?? "publytics.in"}
+          </span>
         </div>
       </div>
       <div className="relative hidden overflow-hidden sm:block" style={{ background: t.art }}>
@@ -441,7 +521,12 @@ function IssueArt({ seed, fg }: { seed: string; fg: string }) {
     }
   }
   return (
-    <svg viewBox="0 0 260 190" className="h-full w-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <svg
+      viewBox="0 0 260 190"
+      className="h-full w-full"
+      aria-hidden="true"
+      preserveAspectRatio="xMidYMid slice"
+    >
       <circle cx="130" cy="95" r="76" fill="none" stroke={fg} strokeWidth="0.8" opacity="0.32" />
       <circle cx="130" cy="95" r="54" fill="none" stroke={fg} strokeWidth="0.8" opacity="0.22" />
       {dots}
@@ -456,18 +541,24 @@ function IssueArt({ seed, fg }: { seed: string; fg: string }) {
 export function MegaCta() {
   return (
     <div className="grid gap-3 md:grid-cols-2">
-      <Link to="/company" hash="contact" className="mega-cta bg-mist text-ink hover:bg-line">
+      <Link to="/company" hash="contact" className="mega-cta card-lift group bg-mist text-ink">
         <span className="t-label text-steel">Government · Enterprise · Research</span>
         <span className="flex items-end justify-between gap-6">
           <span className="t-h2">Request a briefing</span>
-          <ArrowRight className="mb-1 h-6 w-6 shrink-0" strokeWidth={1.25} />
+          <ArrowRight
+            className="mb-1 h-6 w-6 shrink-0 transition-transform duration-300 group-hover:translate-x-1.5"
+            strokeWidth={1.25}
+          />
         </span>
       </Link>
-      <Link to="/public-proof" className="mega-cta bg-ink text-inverse hover:bg-ink-deep">
-        <span className="t-label text-inverse-faint">The argument, in full</span>
+      <Link to="/public-proof" className="mega-cta card-lift group atmo text-inverse">
+        <span className="t-label relative text-inverse-faint">The argument, in full</span>
         <span className="flex items-end justify-between gap-6">
-          <span className="t-h2 text-inverse">Read Public Proof</span>
-          <ArrowRight className="mb-1 h-6 w-6 shrink-0" strokeWidth={1.25} />
+          <span className="t-h2 relative text-inverse">Read Public Proof</span>
+          <ArrowRight
+            className="relative mb-1 h-6 w-6 shrink-0 transition-transform duration-300 group-hover:translate-x-1.5"
+            strokeWidth={1.25}
+          />
         </span>
       </Link>
     </div>
@@ -488,7 +579,9 @@ export function NotchCard({
   tone?: "mist" | "surface";
 }) {
   return (
-    <article className={`notch flex h-full flex-col justify-between p-6 ${tone === "mist" ? "bg-mist" : "bg-surface border border-line"}`}>
+    <article
+      className={`notch flex h-full flex-col justify-between p-6 ${tone === "mist" ? "bg-mist" : "bg-surface border border-line"}`}
+    >
       <p className="t-label text-steel">{label}</p>
       <div className="t-micro mt-16 text-graphite">{children}</div>
     </article>

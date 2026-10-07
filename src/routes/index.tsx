@@ -1,35 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/publytics/chrome";
+import { PageFrame } from "@/components/publytics/chrome";
 import {
   AiSection,
   ArgumentSection,
-  AudienceIndex,
   BoundarySection,
+  CalendarSection,
   CtaSection,
   EvidenceSection,
   Hero,
+  InstitutionsSection,
+  LadderSection,
   PlatformSection,
-  RigourSection,
-  SystemsSection,
-  VoicesSection,
+  SolutionMapSection,
 } from "@/components/publytics/home";
+import { SITE_URL, pageHead } from "@/content/site";
 
 const TITLE = "Publytics — Public Proof";
 const DESCRIPTION =
-  "When a citizen asks whether the promise was kept, who answers? Publytics builds the data and AI infrastructure that public institutions run on.";
+  "One evidence chain from commitment to delivery, for eight kinds of public institution. Publytics builds the data and AI infrastructure public institutions run on — verified, dated, Tamil-first.";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
+    ...pageHead({ title: TITLE, description: DESCRIPTION, path: "/" }),
     scripts: [
       {
         type: "application/ld+json",
@@ -37,10 +30,12 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "Organization",
           name: "Publytics",
+          url: SITE_URL,
+          logo: `${SITE_URL}/favicon.svg`,
           description: DESCRIPTION,
           slogan: "Public Proof",
-          areaServed: "India",
-          knowsAbout: ["Civic data infrastructure", "GovTech", "Responsible AI", "Regulatory technology", "Policy research"],
+          areaServed: "IN",
+          knowsAbout: ["Civic data infrastructure", "GovTech", "DPDP compliance", "Responsible AI", "Policy research", "Tamil language technology"],
         }),
       },
     ],
@@ -49,23 +44,18 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-paper">
-      <AnnouncementBar />
-      <SiteHeader tone="dark" />
-      <main>
-        <Hero />
-        <AudienceIndex />
-        <ArgumentSection />
-        <PlatformSection />
-        <SystemsSection />
-        <AiSection />
-        <RigourSection />
-        <EvidenceSection />
-        <VoicesSection />
-        <BoundarySection />
-        <CtaSection />
-      </main>
-      <SiteFooter />
-    </div>
+    <PageFrame tone="dark">
+      <Hero />
+      <InstitutionsSection />
+      <ArgumentSection />
+      <PlatformSection />
+      <SolutionMapSection />
+      <LadderSection />
+      <CalendarSection />
+      <AiSection />
+      <EvidenceSection />
+      <BoundarySection />
+      <CtaSection />
+    </PageFrame>
   );
 }
